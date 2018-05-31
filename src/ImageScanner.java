@@ -20,12 +20,12 @@ public class ImageScanner {
 
 	public static void main(String[] args) throws IOException, AWTException {
 
-//		accs.add("ze pequeno3");
-//		accs.add("andre matias4");
-//		accs.add("capitao fabio5");
-//		accs.add("zero meia");
-//		accs.add("laranjinha7");
-//		accs.add("dadinho8");
+		accs.add("ze pequeno3");
+		accs.add("andre matias4");
+		accs.add("capitao fabio5");
+		accs.add("zero meia");
+		accs.add("laranjinha7");
+		accs.add("dadinho8");
 		accs.add("neto gouveia9");
 		accs.add("cabo tiao10");
 		accs.add("carl11");
