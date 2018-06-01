@@ -9,45 +9,162 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+
+class ClasseThread implements Runnable {
+
+	BufferedImage bi = null;
+	int id = 0;
+	String acc;
+	int count;
+
+	public ClasseThread(BufferedImage bi, int id, String acc) {
+		this.bi = bi;
+		this.id = id;
+		this.acc = acc;
+	}
+
+	public void run() {
+
+		try {
+			System.out.println(id + " foi");
+			ImageScanner.esperarImagem(bi, id + " aguardando imagem ", acc);
+		} catch (HeadlessException | AWTException e) {
+			e.printStackTrace();
+		}
+	}
+
+}
 
 public class ImageScanner {
 	private static Robot clicker = null;
 	private static Robot keyboard = null;
 	private static int casas = 16;
-	private static ArrayList<String> accs = new ArrayList<>();
+	private static ArrayList<String> accs = new ArrayList<String>();
+	private static int count = 0;
+	private static boolean achouUma = false;
 
-	public static void main(String[] args) throws IOException, AWTException {
+	public static void main(String[] args) throws IOException, AWTException, InterruptedException {
 
-		 accs.add("ze pequeno3");
-		 accs.add("andre matias4");
-		 accs.add("capitao fabio5");
-		accs.add("zero meia");
-		accs.add("laranjinha7");
-		accs.add("dadinho8");
-		accs.add("neto gouveia9");
-		accs.add("cabo tiao10");
-		accs.add("carl11");
-		accs.add("michonne12");
-		accs.add("daryl13");
-		accs.add("glenn14");
+		 accs.add("alberto o ousado");
+		 accs.add("Bruno Costa 10");
+		 accs.add("celio medeiros");
+		 accs.add("Dragão Norueguês");
+		 accs.add("eldelock");
+		 accs.add("flora a valente");
+		 accs.add("Galopeeeira");
+		 accs.add("henrique o teimoso");
+		 accs.add("icaro solar");
+		 accs.add("Jino.kbl");
+		 accs.add("Kwesny");
+		 accs.add("leoficial");
+		 accs.add("mcampos51");
+		 accs.add("NandoGonzalez");
+		 accs.add("oscarJM");
+		 accs.add("paula-ramos");
+		 accs.add("Quasimodo");
+		 accs.add("raptor chan");
+		 accs.add("Sheila Bell");
+		 accs.add("tenacious");
+		 accs.add("urulan");
+		 accs.add("vorago mass");
+		 accs.add("Well In Town");
 
-		for (int i = 0; i < accs.size(); i++) {
-			System.out.println(accs.get(i).toUpperCase());
-			executarPassos(accs.get(i));
-			wait(2);
-		}
+
+//		Thread t3 = new Thread(new Runnable() {
+//			public void run() {
+//				int id = 0;
+//				BufferedImage bi = null;
+//				while (!Thread.interrupted()) {
+//					try {
+//						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraClara.png"));
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+//
+//					try {
+//						System.out.println("t3 começou");
+//						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+//						achouUma = true;
+//					} catch (HeadlessException | AWTException e) {
+//						e.printStackTrace();
+//					}
+////					Thread.yield();
+//				}
+//				System.out.println("t3 parou");
+//			}
+//		});
+//		Thread t4 = new Thread(new Runnable() {
+//			public void run() {
+//				int id = 1;
+//				while (!Thread.interrupted()) {
+//					BufferedImage bi = null;
+//					try {
+//						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraEscura.png"));
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
+//
+//					try {
+//						System.out.println("t4 começou");
+//						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+//						achouUma = true;
+//
+//					} catch (HeadlessException | AWTException e) {
+//						e.printStackTrace();
+//					}
+////					Thread.yield();
+//				}
+//				System.out.println("t4 parou");
+//			}
+//		});
+//		Thread coordenador = new Thread(new Runnable() {
+//			public void run() {
+//				try {
+//					while(!achouUma) {
+//						System.out.println("Ainda não achou nenhuma");
+//						Thread.sleep(500);
+//					}
+//					t3.stop();
+//					t4.stop();
+//				} catch (InterruptedException e) {
+//					System.out.println("Coordenador parando!");
+//					t3.interrupt();
+//					t4.interrupt();
+//				}
+//			}
+//		});
+//
+//		t3.start();
+//		t4.start();
+//		coordenador.start();
+//
+//		t3.join();
+//		t4.join();
+//		coordenador.join();
+
+		
+		 for (int i = 0; i < accs.size(); i++) {
+				System.out.println(accs.get(i).toUpperCase());
+				executarPassos(accs.get(i));
+				wait(2);
+			}
 	}
 
-	public static void executarPassos(String acc) throws AWTException, IOException {
-		//carregandoCidade(acc);
+//	public static synchronized void incCount() {
+//		count++;
+//	}
+
+	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
+		// carregandoCidade(acc);
 		campoLogin(acc);
 		escrever(acc);
 		login(acc);
 		jogar(acc);
 		houndsmoor(acc);
-		//carregandoCidade(acc);
-		wait(10);
+		carregandoCidade(acc);
+		//wait(10);
 		fecharJanela(acc);
 		abrirMenu(acc);
 		noticias(acc);
@@ -63,7 +180,8 @@ public class ImageScanner {
 	}
 
 	public static void campoLogin(String acc) throws HeadlessException, AWTException, IOException {
-		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login", acc);
+		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login",
+				acc);
 	}
 
 	public static void login(String acc) throws HeadlessException, AWTException, IOException {
@@ -79,7 +197,8 @@ public class ImageScanner {
 	}
 
 	public static void fecharJanela(String acc) throws HeadlessException, AWTException, IOException {
-		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")),
+				"Fechar janela", acc);
 	}
 
 	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
@@ -91,7 +210,8 @@ public class ImageScanner {
 	}
 
 	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\grandesEdificios.png")), "Grandes Edificios", acc);
+		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\grandesEdificios.png")),
+				"Grandes Edificios", acc);
 	}
 
 	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
@@ -103,7 +223,8 @@ public class ImageScanner {
 	}
 
 	public static void todaABarra10(String acc) throws HeadlessException, AWTException, IOException {
-		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")),
+				"Toda a barra10", acc);
 	}
 
 	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
@@ -118,11 +239,78 @@ public class ImageScanner {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\sair2.png")), "Sair2", acc);
 	}
 
-	public static void carregandoCidade(String acc) throws HeadlessException, AWTException, IOException {
-		ArrayList<BufferedImage> biCarregandoCidade = new ArrayList<>();
-		biCarregandoCidade.add(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\teste1.png")));
-		biCarregandoCidade.add(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\teste2.png")));
-		aguardar(biCarregandoCidade, "Carregando cidade", acc);
+	public static void carregandoCidade(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		Thread t3 = new Thread(new Runnable() {
+			public void run() {
+				int id = 0;
+				BufferedImage bi = null;
+				while (!Thread.interrupted()) {
+					try {
+						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraClara.png"));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+
+					try {
+						System.out.println("t3 começou");
+						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+						achouUma = true;
+					} catch (HeadlessException | AWTException e) {
+						e.printStackTrace();
+					}
+//					Thread.yield();
+				}
+				System.out.println("t3 parou");
+			}
+		});
+		Thread t4 = new Thread(new Runnable() {
+			public void run() {
+				int id = 1;
+				while (!Thread.interrupted()) {
+					BufferedImage bi = null;
+					try {
+						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraEscura.png"));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+
+					try {
+						System.out.println("t4 começou");
+						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+						achouUma = true;
+
+					} catch (HeadlessException | AWTException e) {
+						e.printStackTrace();
+					}
+//					Thread.yield();
+				}
+				System.out.println("t4 parou");
+			}
+		});
+		Thread coordenador = new Thread(new Runnable() {
+			public void run() {
+				try {
+					while(!achouUma) {
+						System.out.println("Ainda não achou nenhuma");
+						Thread.sleep(500);
+					}
+					t3.stop();
+					t4.stop();
+				} catch (InterruptedException e) {
+					System.out.println("Coordenador parando!");
+					t3.interrupt();
+					t4.interrupt();
+				}
+			}
+		});
+
+		t3.start();
+		t4.start();
+		coordenador.start();
+
+		t3.join();
+		t4.join();
+		coordenador.join();
 	}
 
 	public static void escrever(String string) throws AWTException {
@@ -134,8 +322,27 @@ public class ImageScanner {
 		keyboard = new Robot();
 		for (int i = 0; i < nome.length(); i++) {
 			char[] chars = nome.toUpperCase().toCharArray();
-			keyboard.keyPress(chars[i]);
-			keyboard.keyRelease(chars[i]);
+			switch (chars[i]) {
+			case 'Ã':
+				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
+				keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
+				keyboard.keyPress(KeyEvent.VK_A);
+				keyboard.keyRelease(KeyEvent.VK_A);
+				keyboard.delay(20);
+				break;
+			case 'Ê':
+				keyboard.keyPress(KeyEvent.VK_SHIFT);
+				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
+				keyboard.keyRelease(KeyEvent.VK_SHIFT);
+				keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
+				keyboard.keyPress(KeyEvent.VK_E);
+				keyboard.keyRelease(KeyEvent.VK_E);
+				keyboard.delay(20);
+				break;
+			default:
+				keyboard.keyPress(chars[i]);
+				keyboard.keyRelease(chars[i]);
+			}
 			keyboard.delay(20);
 		}
 	}
@@ -163,9 +370,9 @@ public class ImageScanner {
 		clicker = new Robot();
 		clicker.mouseMove((int) x, (int) y);
 		clicker.delay(500);
-		clicker.mousePress(MouseEvent.BUTTON1_MASK);
+		clicker.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
 		clicker.delay(20);
-		clicker.mouseRelease(MouseEvent.BUTTON1_MASK);
+		clicker.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
 	}
 
 	public static void zoomIn() throws AWTException {
@@ -181,27 +388,34 @@ public class ImageScanner {
 		clicker.delay(200);
 	}
 
-	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
+	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc)
+			throws HeadlessException, AWTException {
+
 		boolean achouUm = false;
 		while (!achouUm) {
-			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc); 
-			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); //Só procura a segunda imagem quando acha a primeira
+			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc);
+			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // Só procura a segunda imagem quando acha a
+																		// primeira
 		}
 	}
 
-	public static void clicar(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
+	public static void clicar(BufferedImage bi, String acao, String acc)
+			throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 30, acao, acc);
 	}
 
-	public static void clicarRapido(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
+	public static void clicarRapido(BufferedImage bi, String acao, String acc)
+			throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 10, acao, acc);
 	}
 
-	public static void clicarLogin(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
+	public static void clicarLogin(BufferedImage bi, String acao, String acc)
+			throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.6, 0.3, 0, 30, acao, acc);
 	}
 
-	public static void clicarColeta(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
+	public static void clicarColeta(BufferedImage bi, String acao, String acc)
+			throws AWTException, HeadlessException, IOException {
 		zoomIn();
 		for (int i = 0; i < casas; i++) {
 			compararImagens(bi, 0.6, 0.1, 0, 2, acao + (i + 1), acc);
@@ -210,11 +424,13 @@ public class ImageScanner {
 		zoomOut();
 	}
 
-	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
+	public static boolean esperarImagem(BufferedImage bi, String acao, String acc)
+			throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false) {
-			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			BufferedImage image = new Robot()
+					.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
 					boolean invalid = false;
@@ -250,11 +466,13 @@ public class ImageScanner {
 		return achou;
 	}
 
-	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
+	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount,
+			String acao, String acc) throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false && count < maxCount) {
-			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			BufferedImage image = new Robot()
+					.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
 					boolean invalid = false;
@@ -276,7 +494,9 @@ public class ImageScanner {
 						}
 					}
 					if (!invalid) {
-						clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
+						clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no
+																										// centro do
+																										// objeto
 						achou = true;
 						System.out.println(acao + ": OK! " + acc);
 						fail = false;
@@ -290,11 +510,13 @@ public class ImageScanner {
 		}
 	}
 
-	public static void compararImagens(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException, IOException {
+	public static void compararImagens(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount,
+			String acao, String acc) throws HeadlessException, AWTException, IOException {
 		if (acao == "Auxiliar") {
 			for (int i = 0; i < 5; i++) {
 				compararPixels(bi, widthMult, heigthMult, count, maxCount, acao, acc);
-				clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fechar.png")), "Fechar", acc);
+				clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fechar.png")), "Fechar",
+						acc);
 			}
 		} else {
 			compararPixels(bi, widthMult, heigthMult, count, maxCount, acao, acc);
