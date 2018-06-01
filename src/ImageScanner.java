@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 public class ImageScanner {
@@ -20,9 +19,9 @@ public class ImageScanner {
 
 	public static void main(String[] args) throws IOException, AWTException {
 
-		accs.add("ze pequeno3");
-		accs.add("andre matias4");
-		accs.add("capitao fabio5");
+		// accs.add("ze pequeno3");
+		// accs.add("andre matias4");
+		// accs.add("capitao fabio5");
 		accs.add("zero meia");
 		accs.add("laranjinha7");
 		accs.add("dadinho8");
@@ -33,41 +32,97 @@ public class ImageScanner {
 		accs.add("daryl13");
 		accs.add("glenn14");
 
-		 for (int i = 0; i < accs.size(); i++) {
-		 System.out.println(accs.get(i).toUpperCase());
-		 executarPassos(accs.get(i));
-		 wait(3);
-		 }
-
-//		auxiliar("ze pequeno3");
-
-	}
-
-	public static void auxiliar(String acc) throws AWTException, IOException {
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\auxiliar.png")), "Auxiliar", acc);
+		for (int i = 0; i < accs.size(); i++) {
+			System.out.println(accs.get(i).toUpperCase());
+			executarPassos(accs.get(i));
+			wait(2);
+		}
 	}
 
 	public static void executarPassos(String acc) throws AWTException, IOException {
-		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login", acc);
+		//carregandoCidade(acc);
+		campoLogin(acc);
 		escrever(acc);
+		login(acc);
+		jogar(acc);
+		houndsmoor(acc);
+		carregandoCidade(acc);
+		// wait(10);
+		fecharJanela(acc);
+		abrirMenu(acc);
+		noticias(acc);
+		grandesEdificios(acc);
+		abrir(acc);
+		todaABarra(acc);
+		todaABarra10(acc);
+		fecharJanela(acc);
+		fecharJanela(acc);
+		logout(acc);
+		sair(acc);
+		sair2(acc);
+	}
+
+	public static void campoLogin(String acc) throws HeadlessException, AWTException, IOException {
+		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login", acc);
+	}
+
+	public static void login(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\login.png")), "Login", acc);
+	}
+
+	public static void jogar(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\jogar.png")), "Jogar", acc);
+	}
+
+	public static void houndsmoor(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\houndsmoor.png")), "Houndsmoor", acc);
-		wait(10);
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
-//		clicarColeta(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\casa.png")), "casa", acc);
-//		clicarColeta(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\casaEstrela.png")), "casaEstrela", acc);
+	}
+
+	public static void fecharJanela(String acc) throws HeadlessException, AWTException, IOException {
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
+	}
+
+	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDe.png")), "Cidade de", acc);
+	}
+
+	public static void noticias(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\noticias.png")), "Noticias", acc);
+	}
+
+	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\grandesEdificios.png")), "Grandes Edificios", acc);
+	}
+
+	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\abrir.png")), "Abrir", acc);
+	}
+
+	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra.png")), "Toda a barra", acc);
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\logout.png")), "Logout", acc);
+	}
+
+	public static void todaABarra10(String acc) throws HeadlessException, AWTException, IOException {
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
+	}
+
+	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\logout.png")), "Logout", acc);
+	}
+
+	public static void sair(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\sair.png")), "Sair", acc);
+	}
+
+	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
 		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\sair2.png")), "Sair2", acc);
+	}
+
+	public static void carregandoCidade(String acc) throws HeadlessException, AWTException, IOException {
+		ArrayList<BufferedImage> biCarregandoCidade = new ArrayList<>();
+		biCarregandoCidade.add(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\teste1.png")));
+		biCarregandoCidade.add(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\teste2.png")));
+		aguardar(biCarregandoCidade, "Carregando cidade", acc);
 	}
 
 	public static void escrever(String string) throws AWTException {
@@ -126,12 +181,20 @@ public class ImageScanner {
 		clicker.delay(200);
 	}
 
+	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
+		boolean achouUm = false;
+		while (!achouUm) {
+			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc); 
+			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); //Só procura a segunda imagem quando acha a primeira
+		}
+	}
+
 	public static void clicar(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 30, acao, acc);
 	}
 
 	public static void clicarRapido(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
-		compararImagens(bi, 0.5, 0.5, 0, 2, acao, acc);
+		compararImagens(bi, 0.5, 0.5, 0, 10, acao, acc);
 	}
 
 	public static void clicarLogin(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
@@ -145,6 +208,46 @@ public class ImageScanner {
 		}
 		wait(3);
 		zoomOut();
+	}
+
+	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
+		boolean achou = false;
+		boolean fail = true;
+		while (achou == false) {
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			for (int x = 0; x < image.getWidth(); x++) {
+				for (int y = 0; y < image.getHeight(); y++) {
+					boolean invalid = false;
+					int k = x, l = y;
+					for (int a = 0; a < bi.getWidth(); a++) {
+						l = y;
+						for (int b = 0; b < bi.getHeight(); b++) {
+							if (bi.getRGB(a, b) != image.getRGB(k, l)) {
+								invalid = true;
+								break;
+							} else {
+								l++;
+							}
+						}
+						if (invalid) {
+							break;
+						} else {
+							k++;
+						}
+					}
+					if (!invalid) {
+						achou = true;
+						System.out.println(acao + ": OK! " + acc);
+						fail = false;
+					}
+				}
+			}
+		}
+		if (fail) {
+			System.out.println(acao + ": FAIL! " + acc);
+			achou = false;
+		}
+		return achou;
 	}
 
 	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
