@@ -19,9 +19,9 @@ public class ImageScanner {
 
 	public static void main(String[] args) throws IOException, AWTException {
 
-		// accs.add("ze pequeno3");
-		// accs.add("andre matias4");
-		// accs.add("capitao fabio5");
+		 accs.add("ze pequeno3");
+		 accs.add("andre matias4");
+		 accs.add("capitao fabio5");
 		accs.add("zero meia");
 		accs.add("laranjinha7");
 		accs.add("dadinho8");
@@ -46,8 +46,8 @@ public class ImageScanner {
 		login(acc);
 		jogar(acc);
 		houndsmoor(acc);
-		carregandoCidade(acc);
-		// wait(10);
+		//carregandoCidade(acc);
+		wait(10);
 		fecharJanela(acc);
 		abrirMenu(acc);
 		noticias(acc);
