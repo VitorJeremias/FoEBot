@@ -6,7 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,114 +49,110 @@ public class ImageScanner {
 
 	public static void main(String[] args) throws IOException, AWTException, InterruptedException {
 
-		 accs.add("alberto o ousado");
-		 accs.add("Bruno Costa 10");
-		 accs.add("celio medeiros");
-		 accs.add("Dragão Norueguês");
-		 accs.add("eldelock");
-		 accs.add("flora a valente");
-		 accs.add("Galopeeeira");
-		 accs.add("henrique o teimoso");
-		 accs.add("icaro solar");
-		 accs.add("Jino.kbl");
-		 accs.add("Kwesny");
-		 accs.add("leoficial");
-		 accs.add("mcampos51");
-		 accs.add("NandoGonzalez");
-		 accs.add("oscarJM");
-		 accs.add("paula-ramos");
-		 accs.add("Quasimodo");
-		 accs.add("raptor chan");
-		 accs.add("Sheila Bell");
-		 accs.add("tenacious");
-		 accs.add("urulan");
-		 accs.add("vorago mass");
-		 accs.add("Well In Town");
-
-
-//		Thread t3 = new Thread(new Runnable() {
-//			public void run() {
-//				int id = 0;
-//				BufferedImage bi = null;
-//				while (!Thread.interrupted()) {
-//					try {
-//						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraClara.png"));
-//					} catch (IOException e1) {
-//						e1.printStackTrace();
-//					}
-//
-//					try {
-//						System.out.println("t3 começou");
-//						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
-//						achouUma = true;
-//					} catch (HeadlessException | AWTException e) {
-//						e.printStackTrace();
-//					}
-////					Thread.yield();
-//				}
-//				System.out.println("t3 parou");
-//			}
-//		});
-//		Thread t4 = new Thread(new Runnable() {
-//			public void run() {
-//				int id = 1;
-//				while (!Thread.interrupted()) {
-//					BufferedImage bi = null;
-//					try {
-//						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraEscura.png"));
-//					} catch (IOException e1) {
-//						e1.printStackTrace();
-//					}
-//
-//					try {
-//						System.out.println("t4 começou");
-//						ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
-//						achouUma = true;
-//
-//					} catch (HeadlessException | AWTException e) {
-//						e.printStackTrace();
-//					}
-////					Thread.yield();
-//				}
-//				System.out.println("t4 parou");
-//			}
-//		});
-//		Thread coordenador = new Thread(new Runnable() {
-//			public void run() {
-//				try {
-//					while(!achouUma) {
-//						System.out.println("Ainda não achou nenhuma");
-//						Thread.sleep(500);
-//					}
-//					t3.stop();
-//					t4.stop();
-//				} catch (InterruptedException e) {
-//					System.out.println("Coordenador parando!");
-//					t3.interrupt();
-//					t4.interrupt();
-//				}
-//			}
-//		});
-//
-//		t3.start();
-//		t4.start();
-//		coordenador.start();
-//
-//		t3.join();
-//		t4.join();
-//		coordenador.join();
-
-		
-		 for (int i = 0; i < accs.size(); i++) {
-				System.out.println(accs.get(i).toUpperCase());
-				executarPassos(accs.get(i));
-				wait(2);
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accs.txt"))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (line.length() > 0) {
+					accs.add(line);
+				}
 			}
+		}
+
+		// accs.add("ze pequeno3");
+		// accs.add("andre matias4");
+		// accs.add("capitao fabio5");
+		// accs.add("zero meia");
+		// accs.add("laranjinha7");
+		// accs.add("dadinho8");
+		// accs.add("neto gouveia9");
+		// accs.add("cabo tiao10");
+		// accs.add("carl11");
+		// accs.add("michonne12");
+		// accs.add("daryl13");
+		// accs.add("glenn14");
+
+		// Thread t3 = new Thread(new Runnable() {
+		// public void run() {
+		// int id = 0;
+		// BufferedImage bi = null;
+		// while (!Thread.interrupted()) {
+		// try {
+		// bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDe.png"));
+		// } catch (IOException e1) {
+		// e1.printStackTrace();
+		// }
+		//
+		// try {
+		// System.out.println("t3 começou");
+		// ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+		// achouUma = true;
+		// } catch (HeadlessException | AWTException e) {
+		// e.printStackTrace();
+		// }
+		// // Thread.yield();
+		// }
+		// System.out.println("t3 parou");
+		// }
+		// });
+		// Thread t4 = new Thread(new Runnable() {
+		// public void run() {
+		// int id = 1;
+		// BufferedImage bi = null;
+		// while (!Thread.interrupted()) {
+		// try {
+		// bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDeEscura.png"));
+		// } catch (IOException e1) {
+		// e1.printStackTrace();
+		// }
+		//
+		// try {
+		// System.out.println("t4 começou");
+		// ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
+		// achouUma = true;
+		//
+		// } catch (HeadlessException | AWTException e) {
+		// e.printStackTrace();
+		// }
+		// // Thread.yield();
+		// }
+		// System.out.println("t4 parou");
+		// }
+		// });
+		// Thread coordenador = new Thread(new Runnable() {
+		// public void run() {
+		// try {
+		// while (!achouUma) {
+		// System.out.println("Ainda não achou nenhuma");
+		// Thread.sleep(500);
+		// }
+		// t3.interrupt();
+		// t4.interrupt();
+		// } catch (InterruptedException e) {
+		// System.out.println("Coordenador parando!");
+		// t3.interrupt();
+		// t4.interrupt();
+		// }
+		// }
+		// });
+		//
+		// t3.start();
+		// t4.start();
+		// coordenador.start();
+		//
+		// t3.join();
+		// t4.join();
+		// coordenador.join();
+
+		for (int i = 0; i < accs.size(); i++) {
+			System.out.println(accs.get(i).toUpperCase());
+			executarPassos(accs.get(i));
+			wait(2);
+		}
 	}
 
-//	public static synchronized void incCount() {
-//		count++;
-//	}
+	// public static synchronized void incCount() {
+	// count++;
+	// }
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
 		// carregandoCidade(acc);
@@ -163,8 +161,8 @@ public class ImageScanner {
 		login(acc);
 		jogar(acc);
 		houndsmoor(acc);
-		carregandoCidade(acc);
-		//wait(10);
+		// carregandoCidade(acc);
+		wait(10);
 		fecharJanela(acc);
 		abrirMenu(acc);
 		noticias(acc);
@@ -180,8 +178,7 @@ public class ImageScanner {
 	}
 
 	public static void campoLogin(String acc) throws HeadlessException, AWTException, IOException {
-		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login",
-				acc);
+		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login", acc);
 	}
 
 	public static void login(String acc) throws HeadlessException, AWTException, IOException {
@@ -197,8 +194,7 @@ public class ImageScanner {
 	}
 
 	public static void fecharJanela(String acc) throws HeadlessException, AWTException, IOException {
-		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")),
-				"Fechar janela", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fecharJanela.png")), "Fechar janela", acc);
 	}
 
 	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
@@ -210,8 +206,7 @@ public class ImageScanner {
 	}
 
 	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
-		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\grandesEdificios.png")),
-				"Grandes Edificios", acc);
+		clicar(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\grandesEdificios.png")), "Grandes Edificios", acc);
 	}
 
 	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
@@ -223,8 +218,7 @@ public class ImageScanner {
 	}
 
 	public static void todaABarra10(String acc) throws HeadlessException, AWTException, IOException {
-		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")),
-				"Toda a barra10", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
 	}
 
 	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
@@ -246,7 +240,7 @@ public class ImageScanner {
 				BufferedImage bi = null;
 				while (!Thread.interrupted()) {
 					try {
-						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraClara.png"));
+						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDe.png"));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -258,7 +252,7 @@ public class ImageScanner {
 					} catch (HeadlessException | AWTException e) {
 						e.printStackTrace();
 					}
-//					Thread.yield();
+					// Thread.yield();
 				}
 				System.out.println("t3 parou");
 			}
@@ -269,7 +263,7 @@ public class ImageScanner {
 				while (!Thread.interrupted()) {
 					BufferedImage bi = null;
 					try {
-						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\barraEscura.png"));
+						bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDeEscura.png"));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -282,7 +276,7 @@ public class ImageScanner {
 					} catch (HeadlessException | AWTException e) {
 						e.printStackTrace();
 					}
-//					Thread.yield();
+					// Thread.yield();
 				}
 				System.out.println("t4 parou");
 			}
@@ -290,12 +284,12 @@ public class ImageScanner {
 		Thread coordenador = new Thread(new Runnable() {
 			public void run() {
 				try {
-					while(!achouUma) {
+					while (!achouUma) {
 						System.out.println("Ainda não achou nenhuma");
 						Thread.sleep(500);
 					}
-					t3.stop();
-					t4.stop();
+					t3.interrupt();
+					t4.interrupt();
 				} catch (InterruptedException e) {
 					System.out.println("Coordenador parando!");
 					t3.interrupt();
@@ -388,8 +382,7 @@ public class ImageScanner {
 		clicker.delay(200);
 	}
 
-	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc)
-			throws HeadlessException, AWTException {
+	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
 
 		boolean achouUm = false;
 		while (!achouUm) {
@@ -399,23 +392,19 @@ public class ImageScanner {
 		}
 	}
 
-	public static void clicar(BufferedImage bi, String acao, String acc)
-			throws AWTException, HeadlessException, IOException {
+	public static void clicar(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 30, acao, acc);
 	}
 
-	public static void clicarRapido(BufferedImage bi, String acao, String acc)
-			throws AWTException, HeadlessException, IOException {
+	public static void clicarRapido(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 10, acao, acc);
 	}
 
-	public static void clicarLogin(BufferedImage bi, String acao, String acc)
-			throws AWTException, HeadlessException, IOException {
+	public static void clicarLogin(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.6, 0.3, 0, 30, acao, acc);
 	}
 
-	public static void clicarColeta(BufferedImage bi, String acao, String acc)
-			throws AWTException, HeadlessException, IOException {
+	public static void clicarColeta(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		zoomIn();
 		for (int i = 0; i < casas; i++) {
 			compararImagens(bi, 0.6, 0.1, 0, 2, acao + (i + 1), acc);
@@ -424,13 +413,11 @@ public class ImageScanner {
 		zoomOut();
 	}
 
-	public static boolean esperarImagem(BufferedImage bi, String acao, String acc)
-			throws HeadlessException, AWTException {
+	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false) {
-			BufferedImage image = new Robot()
-					.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
 					boolean invalid = false;
@@ -466,13 +453,11 @@ public class ImageScanner {
 		return achou;
 	}
 
-	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount,
-			String acao, String acc) throws HeadlessException, AWTException {
+	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false && count < maxCount) {
-			BufferedImage image = new Robot()
-					.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
 					boolean invalid = false;
@@ -510,13 +495,11 @@ public class ImageScanner {
 		}
 	}
 
-	public static void compararImagens(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount,
-			String acao, String acc) throws HeadlessException, AWTException, IOException {
+	public static void compararImagens(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException, IOException {
 		if (acao == "Auxiliar") {
 			for (int i = 0; i < 5; i++) {
 				compararPixels(bi, widthMult, heigthMult, count, maxCount, acao, acc);
-				clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fechar.png")), "Fechar",
-						acc);
+				clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\fechar.png")), "Fechar", acc);
 			}
 		} else {
 			compararPixels(bi, widthMult, heigthMult, count, maxCount, acao, acc);
