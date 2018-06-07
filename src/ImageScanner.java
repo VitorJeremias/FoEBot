@@ -42,9 +42,8 @@ class ClasseThread implements Runnable {
 public class ImageScanner {
 	private static Robot clicker = null;
 	private static Robot keyboard = null;
-	private static int casas = 16;
 	private static ArrayList<String> accs = new ArrayList<String>();
-	private static int count = 0;
+	// private static int count = 0;
 	private static boolean achouUma = false;
 
 	public static void main(String[] args) throws IOException, AWTException, InterruptedException {
@@ -52,7 +51,7 @@ public class ImageScanner {
 		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accs.txt"))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				if (line.length() > 0) {
+				if (line.length() > 0 && !line.startsWith("/")) {
 					accs.add(line);
 				}
 			}
@@ -156,14 +155,16 @@ public class ImageScanner {
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
 		// carregandoCidade(acc);
-		campoLogin(acc);
-		escrever(acc);
-		login(acc);
-		jogar(acc);
-		houndsmoor(acc);
-		// carregandoCidade(acc);
-		wait(10);
+		// campoLogin(acc);
+		// escrever(acc);
+		// login(acc);
+		// jogar(acc);
+		// houndsmoor(acc);
+		// // carregandoCidade(acc);
+		// wait(10);
 		fecharJanela(acc);
+		santuarioDoConhecimento(acc);
+		joalheiro(acc);
 		abrirMenu(acc);
 		noticias(acc);
 		grandesEdificios(acc);
@@ -175,6 +176,20 @@ public class ImageScanner {
 		logout(acc);
 		sair(acc);
 		sair2(acc);
+	}
+
+	public static void joalheiro(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		clicarMercadoria(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\joalheiro.png")), "joalheiro", acc);
+		fecharJanela(acc);
+
+	}
+
+	public static void umDia(String acc) throws HeadlessException, AWTException, IOException {
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\umDia.png")), "umDia", acc);
+	}
+
+	public static void santuarioDoConhecimento(String acc) throws HeadlessException, AWTException, IOException {
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\santuarioDoConhecimento.png")), "santuarioDoConhecimento", acc);
 	}
 
 	public static void campoLogin(String acc) throws HeadlessException, AWTException, IOException {
@@ -404,50 +419,54 @@ public class ImageScanner {
 		compararImagens(bi, 0.6, 0.3, 0, 30, acao, acc);
 	}
 
-	public static void clicarColeta(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
-		zoomIn();
-		for (int i = 0; i < casas; i++) {
-			compararImagens(bi, 0.6, 0.1, 0, 2, acao + (i + 1), acc);
-		}
-		wait(3);
-		zoomOut();
+	public static void clicarMercadoria(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException, InterruptedException {
+		//boolean achouUm = esperarImagem(bi, acao, acc);
+		//while (achouUm) {
+			compararImagens(bi, 0.6, 0.1, 0, 10, acao, acc);
+			umDia(acc);
+			fecharJanela(acc);
+			//achouUm = esperarImagem(bi, acao, acc);
+		//}
 	}
 
 	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
+		System.out.println("Procurando imagem " + acao);
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false) {
 			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
-					boolean invalid = false;
-					int k = x, l = y;
-					for (int a = 0; a < bi.getWidth(); a++) {
-						l = y;
-						for (int b = 0; b < bi.getHeight(); b++) {
-							if (bi.getRGB(a, b) != image.getRGB(k, l)) {
-								invalid = true;
+					if (!achou) {
+						boolean invalid = false;
+						int k = x, l = y;
+						for (int a = 0; a < bi.getWidth(); a++) {
+							l = y;
+							for (int b = 0; b < bi.getHeight(); b++) {
+								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
+									invalid = true;
+									break;
+								} else {
+									l++;
+								}
+							}
+							if (invalid) {
 								break;
 							} else {
-								l++;
+								k++;
 							}
 						}
-						if (invalid) {
-							break;
-						} else {
-							k++;
+						if (!invalid) {
+							achou = true;
+							System.out.println(acao + ": Achou! " + x + " " + acc);
+							fail = false;
 						}
-					}
-					if (!invalid) {
-						achou = true;
-						System.out.println(acao + ": OK! " + acc);
-						fail = false;
 					}
 				}
 			}
 		}
 		if (fail) {
-			System.out.println(acao + ": FAIL! " + acc);
+			System.out.println(acao + ": Não achou! " + acc);
 			achou = false;
 		}
 		return achou;
@@ -457,34 +476,35 @@ public class ImageScanner {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false && count < maxCount) {
+			int i = 0;
 			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
-					boolean invalid = false;
-					int k = x, l = y;
-					for (int a = 0; a < bi.getWidth(); a++) {
-						l = y;
-						for (int b = 0; b < bi.getHeight(); b++) {
-							if (bi.getRGB(a, b) != image.getRGB(k, l)) {
-								invalid = true;
+					if (!achou) {
+						boolean invalid = false;
+						int k = x, l = y;
+						for (int a = 0; a < bi.getWidth(); a++) {
+							l = y;
+							for (int b = 0; b < bi.getHeight(); b++) {
+								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
+									invalid = true;
+									break;
+								} else {
+									l++;
+								}
+							}
+							if (invalid) {
 								break;
 							} else {
-								l++;
+								k++;
 							}
 						}
-						if (invalid) {
-							break;
-						} else {
-							k++;
+						if (!invalid) {
+							clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
+							achou = true;
+							System.out.println(acao + ": OK! " + i + " " + acc);
+							fail = false;
 						}
-					}
-					if (!invalid) {
-						clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no
-																										// centro do
-																										// objeto
-						achou = true;
-						System.out.println(acao + ": OK! " + acc);
-						fail = false;
 					}
 				}
 			}
