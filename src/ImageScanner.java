@@ -14,36 +14,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-class ClasseThread implements Runnable {
-
-	BufferedImage bi = null;
-	int id = 0;
-	String acc;
-	int count;
-
-	public ClasseThread(BufferedImage bi, int id, String acc) {
-		this.bi = bi;
-		this.id = id;
-		this.acc = acc;
-	}
-
-	public void run() {
-
-		try {
-			System.out.println(id + " foi");
-			ImageScanner.esperarImagem(bi, id + " aguardando imagem ", acc);
-		} catch (HeadlessException | AWTException e) {
-			e.printStackTrace();
-		}
-	}
-
-}
-
 public class ImageScanner {
 	private static Robot clicker = null;
 	private static Robot keyboard = null;
 	private static ArrayList<String> accs = new ArrayList<String>();
-	// private static int count = 0;
 	private static boolean achouUma = false;
 
 	public static void main(String[] args) throws IOException, AWTException, InterruptedException {
@@ -56,19 +30,6 @@ public class ImageScanner {
 				}
 			}
 		}
-
-		// accs.add("ze pequeno3");
-		// accs.add("andre matias4");
-		// accs.add("capitao fabio5");
-		// accs.add("zero meia");
-		// accs.add("laranjinha7");
-		// accs.add("dadinho8");
-		// accs.add("neto gouveia9");
-		// accs.add("cabo tiao10");
-		// accs.add("carl11");
-		// accs.add("michonne12");
-		// accs.add("daryl13");
-		// accs.add("glenn14");
 
 		// Thread t3 = new Thread(new Runnable() {
 		// public void run() {
@@ -149,19 +110,14 @@ public class ImageScanner {
 		}
 	}
 
-	// public static synchronized void incCount() {
-	// count++;
-	// }
-
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
-		// carregandoCidade(acc);
-		// campoLogin(acc);
-		// escrever(acc);
-		// login(acc);
-		// jogar(acc);
-		// houndsmoor(acc);
-		// // carregandoCidade(acc);
-		// wait(10);
+		carregandoCidade(acc);
+		campoLogin(acc);
+		escrever(acc);
+		login(acc);
+		jogar(acc);
+		houndsmoor(acc);
+		wait(10);
 		fecharJanela(acc);
 		santuarioDoConhecimento(acc);
 		joalheiro(acc);
@@ -420,13 +376,13 @@ public class ImageScanner {
 	}
 
 	public static void clicarMercadoria(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException, InterruptedException {
-		//boolean achouUm = esperarImagem(bi, acao, acc);
-		//while (achouUm) {
-			compararImagens(bi, 0.6, 0.1, 0, 10, acao, acc);
-			umDia(acc);
-			fecharJanela(acc);
-			//achouUm = esperarImagem(bi, acao, acc);
-		//}
+		// boolean achouUm = esperarImagem(bi, acao, acc);
+		// while (achouUm) {
+		compararImagens(bi, 0.6, 0.1, 0, 10, acao, acc);
+		umDia(acc);
+		fecharJanela(acc);
+		// achouUm = esperarImagem(bi, acao, acc);
+		// }
 	}
 
 	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
