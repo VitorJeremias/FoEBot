@@ -1,5 +1,7 @@
 import java.awt.AWTException;
 import java.awt.HeadlessException;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -19,6 +21,7 @@ public class ImageScanner {
 	private static Robot keyboard = null;
 	private static ArrayList<String> accs = new ArrayList<String>();
 	private static boolean achouUma = false;
+	private static String contasSemUsarPF = "";
 
 	public static void main(String[] args) throws IOException, AWTException, InterruptedException {
 
@@ -31,87 +34,15 @@ public class ImageScanner {
 			}
 		}
 
-		// Thread t3 = new Thread(new Runnable() {
-		// public void run() {
-		// int id = 0;
-		// BufferedImage bi = null;
-		// while (!Thread.interrupted()) {
-		// try {
-		// bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDe.png"));
-		// } catch (IOException e1) {
-		// e1.printStackTrace();
-		// }
-		//
-		// try {
-		// System.out.println("t3 começou");
-		// ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
-		// achouUma = true;
-		// } catch (HeadlessException | AWTException e) {
-		// e.printStackTrace();
-		// }
-		// // Thread.yield();
-		// }
-		// System.out.println("t3 parou");
-		// }
-		// });
-		// Thread t4 = new Thread(new Runnable() {
-		// public void run() {
-		// int id = 1;
-		// BufferedImage bi = null;
-		// while (!Thread.interrupted()) {
-		// try {
-		// bi = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\cidadeDeEscura.png"));
-		// } catch (IOException e1) {
-		// e1.printStackTrace();
-		// }
-		//
-		// try {
-		// System.out.println("t4 começou");
-		// ImageScanner.esperarImagem(bi, id + " aguardando imagem ", "");
-		// achouUma = true;
-		//
-		// } catch (HeadlessException | AWTException e) {
-		// e.printStackTrace();
-		// }
-		// // Thread.yield();
-		// }
-		// System.out.println("t4 parou");
-		// }
-		// });
-		// Thread coordenador = new Thread(new Runnable() {
-		// public void run() {
-		// try {
-		// while (!achouUma) {
-		// System.out.println("Ainda não achou nenhuma");
-		// Thread.sleep(500);
-		// }
-		// t3.interrupt();
-		// t4.interrupt();
-		// } catch (InterruptedException e) {
-		// System.out.println("Coordenador parando!");
-		// t3.interrupt();
-		// t4.interrupt();
-		// }
-		// }
-		// });
-		//
-		// t3.start();
-		// t4.start();
-		// coordenador.start();
-		//
-		// t3.join();
-		// t4.join();
-		// coordenador.join();
-
 		for (int i = 0; i < accs.size(); i++) {
 			System.out.println(accs.get(i).toUpperCase());
 			executarPassos(accs.get(i));
 			wait(2);
 		}
+		System.err.println("Contas sem upar: " + contasSemUsarPF);
 	}
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
-		carregandoCidade(acc);
 		campoLogin(acc);
 		escrever(acc);
 		login(acc);
@@ -119,14 +50,14 @@ public class ImageScanner {
 		houndsmoor(acc);
 		wait(10);
 		fecharJanela(acc);
-		santuarioDoConhecimento(acc);
-		joalheiro(acc);
+		moverCidade(acc);
+		// santuarioDoConhecimento(acc);
+		// joalheiro(acc);
 		abrirMenu(acc);
 		noticias(acc);
 		grandesEdificios(acc);
 		abrir(acc);
-		todaABarra(acc);
-		todaABarra10(acc);
+		todaABarraFull(acc);
 		fecharJanela(acc);
 		fecharJanela(acc);
 		logout(acc);
@@ -134,10 +65,36 @@ public class ImageScanner {
 		sair2(acc);
 	}
 
+	public static void moverCidade(String acc) throws AWTException, IOException, InterruptedException {
+		Robot clicker = new Robot();
+		int x, y;
+		BufferedImage biInicial = ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\pontoInicial.png"));
+		String acao = "movendo cidade1";
+		acharImagem(biInicial, 0.6, 0.3, 0, 30, acao, acc);
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		x = p.x;
+		y = p.y;
+		acao = "movendo cidade2";
+		clicker.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
+		Thread.sleep(500);
+		System.out.println("Movendo");
+		int hor = 40;
+		int ver = 200;
+		for (int i = 0; i < hor; i++) {
+			clicker.mouseMove(x + i, y);
+		}
+		p = MouseInfo.getPointerInfo().getLocation();
+		x = p.x;
+		y = p.y;
+		for (int i = 0; i < ver; i++) {
+			clicker.mouseMove(x, y - i);
+		}
+		clicker.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
+	}
+
 	public static void joalheiro(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
 		clicarMercadoria(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\joalheiro.png")), "joalheiro", acc);
 		fecharJanela(acc);
-
 	}
 
 	public static void umDia(String acc) throws HeadlessException, AWTException, IOException {
@@ -145,11 +102,12 @@ public class ImageScanner {
 	}
 
 	public static void santuarioDoConhecimento(String acc) throws HeadlessException, AWTException, IOException {
-		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\santuarioDoConhecimento.png")), "santuarioDoConhecimento", acc);
+		clicarInstant(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\santuarioDoConhecimento.png")), "santuarioDoConhecimento", acc);
 	}
 
 	public static void campoLogin(String acc) throws HeadlessException, AWTException, IOException {
 		clicarLogin(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png")), "Campo Login", acc);
+		wait(1);
 	}
 
 	public static void login(String acc) throws HeadlessException, AWTException, IOException {
@@ -190,6 +148,21 @@ public class ImageScanner {
 
 	public static void todaABarra10(String acc) throws HeadlessException, AWTException, IOException {
 		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
+	}
+
+	public static void todaABarraFull(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		Boolean temPF = false;
+		temPF = temPF || esperarImagemComLimite(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), 10, "Toda a barra10", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra10.png")), "Toda a barra10", acc);
+		temPF = temPF || esperarImagemComLimite(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra.png")), 10, "Toda a barra", acc);
+		clicarRapido(ImageIO.read(new File("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\todaABarra.png")), "Toda a barra", acc);
+		if (!temPF) {
+			if (contasSemUsarPF.length() == 0) {
+				contasSemUsarPF = acc;
+			} else {
+				contasSemUsarPF = contasSemUsarPF + ", " + acc;
+			}
+		}
 	}
 
 	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
@@ -358,8 +331,7 @@ public class ImageScanner {
 		boolean achouUm = false;
 		while (!achouUm) {
 			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc);
-			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // Só procura a segunda imagem quando acha a
-																		// primeira
+			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // Só procura a segunda imagem quando acha a primeira
 		}
 	}
 
@@ -369,6 +341,10 @@ public class ImageScanner {
 
 	public static void clicarRapido(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
 		compararImagens(bi, 0.5, 0.5, 0, 10, acao, acc);
+	}
+
+	public static void clicarInstant(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
+		compararImagens(bi, 0.5, 0.5, 0, 1, acao, acc);
 	}
 
 	public static void clicarLogin(BufferedImage bi, String acao, String acc) throws AWTException, HeadlessException, IOException {
@@ -414,7 +390,7 @@ public class ImageScanner {
 						}
 						if (!invalid) {
 							achou = true;
-							System.out.println(acao + ": Achou! " + x + " " + acc);
+							System.out.println(acao + ": Achou! " + " " + acc);
 							fail = false;
 						}
 					}
@@ -428,11 +404,99 @@ public class ImageScanner {
 		return achou;
 	}
 
+	public static boolean esperarImagemComLimite(BufferedImage bi, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
+		System.out.println("Procurando " + "\"" + acao + "\"");
+		boolean achou = false;
+		boolean fail = true;
+		int count = 0;
+		while (achou == false && count < maxCount) {
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			for (int x = 0; x < image.getWidth(); x++) {
+				for (int y = 0; y < image.getHeight(); y++) {
+					if (!achou) {
+						boolean invalid = false;
+						int k = x, l = y;
+						for (int a = 0; a < bi.getWidth(); a++) {
+							l = y;
+							for (int b = 0; b < bi.getHeight(); b++) {
+								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
+									invalid = true;
+									break;
+								} else {
+									l++;
+								}
+							}
+							if (invalid) {
+								break;
+							} else {
+								k++;
+							}
+						}
+						if (!invalid) {
+							achou = true;
+							System.out.println(acao + ": Achou! " + " " + acc);
+							fail = false;
+						}
+					}
+				}
+			}
+			count++;
+		}
+		if (fail) {
+			System.out.println(acao + ": Não achou! " + acc);
+			achou = false;
+		}
+		return achou;
+	}
+
+	public static void acharImagem(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
+		Robot clicker = new Robot();
+		boolean achou = false;
+		boolean fail = true;
+		while (achou == false && count < maxCount) {
+			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+			for (int x = 0; x < image.getWidth(); x++) {
+				for (int y = 0; y < image.getHeight(); y++) {
+					if (!achou) {
+						boolean invalid = false;
+						int k = x, l = y;
+						for (int a = 0; a < bi.getWidth(); a++) {
+							l = y;
+							for (int b = 0; b < bi.getHeight(); b++) {
+								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
+									invalid = true;
+									break;
+								} else {
+									l++;
+								}
+							}
+							if (invalid) {
+								break;
+							} else {
+								k++;
+							}
+						}
+						if (!invalid) {
+							clicker.mouseMove((int) k - (int) (bi.getWidth() * widthMult), (int) l - (int) (bi.getHeight() * heigthMult));
+							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
+							achou = true;
+							System.out.println(acao + ": OK! " + " " + acc);
+							fail = false;
+						}
+					}
+				}
+			}
+			count++;
+		}
+		if (fail) {
+			System.out.println(acao + ": FAIL! " + acc);
+		}
+	}
+
 	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int count, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		while (achou == false && count < maxCount) {
-			int i = 0;
 			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
 			for (int x = 0; x < image.getWidth(); x++) {
 				for (int y = 0; y < image.getHeight(); y++) {
@@ -458,7 +522,7 @@ public class ImageScanner {
 						if (!invalid) {
 							clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
 							achou = true;
-							System.out.println(acao + ": OK! " + i + " " + acc);
+							System.out.println(acao + ": OK! " + " " + acc);
 							fail = false;
 						}
 					}
