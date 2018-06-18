@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,8 +14,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class ImageScanner {
-	private static Robot clicker = null;
-	private static Robot keyboard = null;
 	private static ArrayList<String> accs = new ArrayList<String>();
 	private static String contasSemUsarPF = "";
 
@@ -41,8 +38,8 @@ public class ImageScanner {
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
 		compararImagens(EnumImagens.CAMPO_LOGIN, acc);
-		wait(1);
-		escrever(acc);
+		Thread.sleep(500);
+		InputManager.escrever(acc);
 		compararImagens(EnumImagens.LOGIN, acc);
 		compararImagens(EnumImagens.JOGAR, acc);
 		compararImagens(EnumImagens.HOUNDSMOOR, acc);
@@ -116,7 +113,7 @@ public class ImageScanner {
 			System.err.println(acc + " Adicionado na lista");
 		}
 	}
-	
+
 	public static void coletarPrata(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
 		Robot keyboard = new Robot();
 		keyboard.keyPress(KeyEvent.VK_W);
@@ -126,7 +123,7 @@ public class ImageScanner {
 		compararImagens(EnumImagens.ABRIR_TABERNA2, acc);
 		compararImagens(EnumImagens.COLETAR_PRATA, acc);
 		compararImagens(EnumImagens.OK, acc);
-		
+
 	}
 
 	public static void moverCidade(String acc) throws AWTException, IOException, InterruptedException {
@@ -139,87 +136,87 @@ public class ImageScanner {
 		keyboard.keyRelease(KeyEvent.VK_S);
 	}
 
-	public static void escrever(String string) throws AWTException {
-		apagar();
-		digitar(string);
-	}
+	// public static void escrever(String string) throws AWTException {
+	// apagar();
+	// digitar(string);
+	// }
 
-	public static void digitar(String nome) throws AWTException {
-		keyboard = new Robot();
-		for (int i = 0; i < nome.length(); i++) {
-			char[] chars = nome.toUpperCase().toCharArray();
-			switch (chars[i]) {
-			case 'Ã':
-				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
-				keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
-				keyboard.keyPress(KeyEvent.VK_A);
-				keyboard.keyRelease(KeyEvent.VK_A);
-				keyboard.delay(20);
-				break;
-			case 'Ê':
-				keyboard.keyPress(KeyEvent.VK_SHIFT);
-				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
-				keyboard.keyRelease(KeyEvent.VK_SHIFT);
-				keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
-				keyboard.keyPress(KeyEvent.VK_E);
-				keyboard.keyRelease(KeyEvent.VK_E);
-				keyboard.delay(20);
-				break;
-			default:
-				keyboard.keyPress(chars[i]);
-				keyboard.keyRelease(chars[i]);
-			}
-			keyboard.delay(20);
-		}
-	}
-
-	public static void apagar() throws AWTException {
-		keyboard = new Robot();
-		for (int i = 0; i < 20; i++) {
-			keyboard.keyPress(KeyEvent.VK_BACK_SPACE);
-			keyboard.delay(20);
-		}
-	}
+	// public static void digitar(String nome) throws AWTException {
+	// keyboard = new Robot();
+	// for (int i = 0; i < nome.length(); i++) {
+	// char[] chars = nome.toUpperCase().toCharArray();
+	// switch (chars[i]) {
+	// case 'Ã':
+	// keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
+	// keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
+	// keyboard.keyPress(KeyEvent.VK_A);
+	// keyboard.keyRelease(KeyEvent.VK_A);
+	// keyboard.delay(20);
+	// break;
+	// case 'Ê':
+	// keyboard.keyPress(KeyEvent.VK_SHIFT);
+	// keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
+	// keyboard.keyRelease(KeyEvent.VK_SHIFT);
+	// keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
+	// keyboard.keyPress(KeyEvent.VK_E);
+	// keyboard.keyRelease(KeyEvent.VK_E);
+	// keyboard.delay(20);
+	// break;
+	// default:
+	// keyboard.keyPress(chars[i]);
+	// keyboard.keyRelease(chars[i]);
+	// }
+	// keyboard.delay(20);
+	// }
+	// }
+	//
+	// public static void apagar() throws AWTException {
+	// keyboard = new Robot();
+	// for (int i = 0; i < 20; i++) {
+	// keyboard.keyPress(KeyEvent.VK_BACK_SPACE);
+	// keyboard.delay(20);
+	// }
+	// }
 
 	public static void wait(int segundos) throws AWTException {
-		clicker = new Robot();
+		InputManager.clicker = new Robot();
 		System.out.print("Wait " + segundos + "s: ");
 		for (int i = 0; i < segundos - 1; i++) {
-			clicker.delay(1000);
+			InputManager.clicker.delay(1000);
 			System.out.print(i + 1 + ", ");
 		}
-		clicker.delay(1000);
+		InputManager.clicker.delay(1000);
 		System.out.println(segundos);
 	}
 
-	public static void clickEvent(double x, double y) throws AWTException {
-		clicker = new Robot();
-		clicker.mouseMove((int) x, (int) y);
-		clicker.delay(500);
-		clicker.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
-		clicker.delay(20);
-		clicker.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
-	}
-
-	public static void zoomIn() throws AWTException {
-		clicker = new Robot();
-		clicker.delay(500);
-		clicker.mouseWheel(-50);
-		clicker.delay(200);
-	}
-
-	public static void zoomOut() throws AWTException {
-		clicker = new Robot();
-		clicker.mouseWheel(50);
-		clicker.delay(200);
-	}
+	// public static void clickEvent(double x, double y) throws AWTException {
+	// clicker = new Robot();
+	// clicker.mouseMove((int) x, (int) y);
+	// clicker.delay(500);
+	// clicker.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
+	// clicker.delay(20);
+	// clicker.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
+	// }
+	//
+	// public static void zoomIn() throws AWTException {
+	// clicker = new Robot();
+	// clicker.delay(500);
+	// clicker.mouseWheel(-50);
+	// clicker.delay(200);
+	// }
+	//
+	// public static void zoomOut() throws AWTException {
+	// clicker = new Robot();
+	// clicker.mouseWheel(50);
+	// clicker.delay(200);
+	// }
 
 	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
 
 		boolean achouUm = false;
 		while (!achouUm) {
 			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc);
-			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // S� procura a segunda imagem quando acha a primeira
+			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // So procura a segunda imagem quando acha a primeira
 		}
 	}
 
@@ -384,7 +381,7 @@ public class ImageScanner {
 							}
 						}
 						if (!invalid) {
-							clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
+							InputManager.clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
 							achou = true;
 							System.out.println(acao + ": OK! " + " " + acc);
 							fail = false;
