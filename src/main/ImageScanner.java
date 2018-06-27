@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.AWTException;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
@@ -12,6 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+
+import modelo.EnumImagens;
+import modelo.InputManager;
+import utils.StringConstants;
 
 public class ImageScanner {
 	private static ArrayList<String> accs = new ArrayList<String>();
@@ -31,14 +37,14 @@ public class ImageScanner {
 		for (int i = 0; i < accs.size(); i++) {
 			System.out.println(accs.get(i).toUpperCase());
 			executarPassos(accs.get(i));
-			wait(2);
+			wait(3);
 		}
 		System.err.println("Contas sem upar: " + contasSemUsarPF);
 	}
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
 		compararImagens(EnumImagens.CAMPO_LOGIN, acc);
-		Thread.sleep(500);
+		Thread.sleep(1000);
 		InputManager.escrever(acc);
 		compararImagens(EnumImagens.LOGIN, acc);
 		compararImagens(EnumImagens.JOGAR, acc);
@@ -84,6 +90,8 @@ public class ImageScanner {
 			Thread.sleep(1500);
 			temAuxiliar = esperarImagemComLimite(EnumImagens.AUXILIAR, acc);
 			Thread.sleep(300);
+			compararImagens(EnumImagens.OK, acc);
+			Thread.sleep(200);
 		} while (temAuxiliar);
 	}
 
@@ -136,48 +144,6 @@ public class ImageScanner {
 		keyboard.keyRelease(KeyEvent.VK_S);
 	}
 
-	// public static void escrever(String string) throws AWTException {
-	// apagar();
-	// digitar(string);
-	// }
-
-	// public static void digitar(String nome) throws AWTException {
-	// keyboard = new Robot();
-	// for (int i = 0; i < nome.length(); i++) {
-	// char[] chars = nome.toUpperCase().toCharArray();
-	// switch (chars[i]) {
-	// case 'Ã':
-	// keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
-	// keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
-	// keyboard.keyPress(KeyEvent.VK_A);
-	// keyboard.keyRelease(KeyEvent.VK_A);
-	// keyboard.delay(20);
-	// break;
-	// case 'Ê':
-	// keyboard.keyPress(KeyEvent.VK_SHIFT);
-	// keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
-	// keyboard.keyRelease(KeyEvent.VK_SHIFT);
-	// keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
-	// keyboard.keyPress(KeyEvent.VK_E);
-	// keyboard.keyRelease(KeyEvent.VK_E);
-	// keyboard.delay(20);
-	// break;
-	// default:
-	// keyboard.keyPress(chars[i]);
-	// keyboard.keyRelease(chars[i]);
-	// }
-	// keyboard.delay(20);
-	// }
-	// }
-	//
-	// public static void apagar() throws AWTException {
-	// keyboard = new Robot();
-	// for (int i = 0; i < 20; i++) {
-	// keyboard.keyPress(KeyEvent.VK_BACK_SPACE);
-	// keyboard.delay(20);
-	// }
-	// }
-
 	public static void wait(int segundos) throws AWTException {
 		InputManager.clicker = new Robot();
 		System.out.print("Wait " + segundos + "s: ");
@@ -188,28 +154,6 @@ public class ImageScanner {
 		InputManager.clicker.delay(1000);
 		System.out.println(segundos);
 	}
-
-	// public static void clickEvent(double x, double y) throws AWTException {
-	// clicker = new Robot();
-	// clicker.mouseMove((int) x, (int) y);
-	// clicker.delay(500);
-	// clicker.mousePress(MouseEvent.BUTTON1_DOWN_MASK);
-	// clicker.delay(20);
-	// clicker.mouseRelease(MouseEvent.BUTTON1_DOWN_MASK);
-	// }
-	//
-	// public static void zoomIn() throws AWTException {
-	// clicker = new Robot();
-	// clicker.delay(500);
-	// clicker.mouseWheel(-50);
-	// clicker.delay(200);
-	// }
-	//
-	// public static void zoomOut() throws AWTException {
-	// clicker = new Robot();
-	// clicker.mouseWheel(50);
-	// clicker.delay(200);
-	// }
 
 	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
 
@@ -338,7 +282,8 @@ public class ImageScanner {
 						}
 						if (!invalid) {
 							clicker.mouseMove((int) k - (int) (bi.getWidth() * widthMult), (int) l - (int) (bi.getHeight() * heigthMult));
-							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() * heigthMult)); // Clica no centro do objeto
+							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() *
+							// heigthMult)); // Clica no centro do objeto
 							achou = true;
 							System.out.println(acao + ": OK! " + " " + acc);
 							fail = false;

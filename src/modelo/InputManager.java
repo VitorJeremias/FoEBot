@@ -1,18 +1,20 @@
+package modelo;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class InputManager {
-	
-	static Robot clicker = null;
+
+	public static Robot clicker = null;
 	private static Robot keyboard = null;
-	
+
 	public static void escrever(String string) throws AWTException {
 		apagar();
 		digitar(string);
 	}
-	
+
 	public static void digitar(String nome) throws AWTException {
 		keyboard = new Robot();
 		for (int i = 0; i < nome.length(); i++) {
@@ -49,10 +51,7 @@ public class InputManager {
 			keyboard.delay(20);
 		}
 	}
-	
-	
-	
-	
+
 	public static void clickEvent(double x, double y) throws AWTException {
 		clicker = new Robot();
 		clicker.mouseMove((int) x, (int) y);

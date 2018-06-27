@@ -1,8 +1,13 @@
+package modelo;
+
+import utils.StringConstants;
+
 public enum EnumImagens {
+
 	//@formatter:off
 	
 	//CENTRALIZADO_1
-	ABRIR_TABERNA("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\abrirTaberna.png", EnumParametrosImagem.CENTRALIZADO_10, "AbrirTaberna"),
+	ABRIR_TABERNA(StringConstants.path + "abrirTaberna.png", EnumParametrosImagem.CENTRALIZADO_10, "AbrirTaberna"),
 	ABRIR_TABERNA2("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\abrirTaberna2.png", EnumParametrosImagem.CENTRALIZADO_10, "AbrirTaberna2"),
 	ACEITAR_AMIZADE("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\aceitarAmizade.png", EnumParametrosImagem.CENTRALIZADO_1, "AceitarAmizade"),
 	AUXILIAR("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\auxiliar.png", EnumParametrosImagem.CENTRALIZADO_1, "Auxiliar"),
@@ -31,13 +36,15 @@ public enum EnumImagens {
 	
 	//INFERIOR_ESQUERDO_30
 	CAMPO_LOGIN("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\campoLogin.png", EnumParametrosImagem.INFERIOR_ESQUERDO_30, "CampoLogin");
-	//formatter:on
-	
-	
+	//@formatter:on
+
 	private String path;
 	private EnumParametrosImagem parametrosDaImagem;
 	private String acao;
-	
+
+	public static String caminho() {
+		return "C:\\Users\\Vitor\\Downloads\\PrintsFOE\\";
+	}
 
 	public String getPath() {
 		return path;

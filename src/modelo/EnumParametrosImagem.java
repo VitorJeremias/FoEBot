@@ -1,3 +1,5 @@
+package modelo;
+
 public enum EnumParametrosImagem {
 	//@formatter:off
 	CENTRALIZADO_1(0.5, 0.5, 1),
