@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 
 import modelo.EnumImagens;
 import modelo.InputManager;
-import utils.StringConstants;
 
 public class ImageScanner {
 	private static ArrayList<String> accs = new ArrayList<String>();
@@ -237,7 +236,7 @@ public class ImageScanner {
 						}
 						if (!invalid) {
 							achou = true;
-							// System.out.println(imagem.getAcao() + ": Achou! " + " " + acc);
+							System.out.println(imagem.getAcao() + ": Achou! " + " " + acc);
 							fail = false;
 						}
 					}
@@ -246,7 +245,7 @@ public class ImageScanner {
 			count++;
 		}
 		if (fail) {
-			// System.out.println(imagem.getAcao() + ": N�o achou! " + acc);
+			System.out.println(imagem.getAcao() + ": Nao achou! " + acc);
 			achou = false;
 		}
 		return achou;
@@ -282,8 +281,8 @@ public class ImageScanner {
 						}
 						if (!invalid) {
 							clicker.mouseMove((int) k - (int) (bi.getWidth() * widthMult), (int) l - (int) (bi.getHeight() * heigthMult));
-							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight() *
-							// heigthMult)); // Clica no centro do objeto
+							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight()
+							// *heigthMult)); // Clica no centro do objeto
 							achou = true;
 							System.out.println(acao + ": OK! " + " " + acc);
 							fail = false;
