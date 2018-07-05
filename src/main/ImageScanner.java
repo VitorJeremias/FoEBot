@@ -56,6 +56,7 @@ public class ImageScanner {
 		aceitarAmizade(acc);
 		auxiliar(acc);
 		sentarNaTaberna(acc);
+		coletar(acc);
 		moverCidade(acc);
 		coletarPrata(acc);
 		compararImagens(EnumImagens.ABRIR_MENU, acc);
@@ -68,6 +69,46 @@ public class ImageScanner {
 		compararImagens(EnumImagens.LOGOUT, acc);
 		compararImagens(EnumImagens.SAIR, acc);
 		compararImagens(EnumImagens.SAIR2, acc);
+	}
+
+	public static void coletarCupulaNivel1(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.CUPULA_NIVEL_1, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+	}
+
+	public static void coletarPilarDosHeroisNivel2(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PILAR_DOS_HEROIS_NIVEL_2, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+	}
+
+	public static void coletarPilarDosHeroisNivel4(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PILAR_DOS_HEROIS_NIVEL_4, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+	}
+
+	public static void coletarPrefeituraIdadeDoFerro(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PREFEITURA_IDADE_DO_FERRO, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+	}
+
+	public static void coletarPrefeituraIdadeMedia(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PREFEITURA_IDADE_MEDIA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+	}
+
+	public static void coletarSantuarioDoConhecimento(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.SANTUARIO_DO_CONHECIMENTO, acc);
+	}
+
+	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
+		coletarPrefeituraIdadeDoFerro(acc);
+		coletarPrefeituraIdadeMedia(acc);
+		coletarCupulaNivel1(acc);
+		coletarPilarDosHeroisNivel2(acc);
+		coletarPilarDosHeroisNivel4(acc);
+		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_3, acc);
+		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_4, acc);
+		coletarSantuarioDoConhecimento(acc);
 	}
 
 	public static void aceitarAmizade(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
@@ -103,6 +144,7 @@ public class ImageScanner {
 			Thread.sleep(500);
 			temTabernaPraSentar = esperarImagemComLimite(EnumImagens.SENTAR_NA_TABERNA, acc);
 		} while (temTabernaPraSentar);
+		compararImagens(EnumImagens.OK, acc);
 	}
 
 	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
@@ -111,6 +153,7 @@ public class ImageScanner {
 		compararImagens(EnumImagens.TODA_A_BARRA_10, acc);
 		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
 		compararImagens(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
+		Thread.sleep(1200);
 		if (!temPF) {
 			if (contasSemUsarPF.length() == 0) {
 				contasSemUsarPF = acc;
