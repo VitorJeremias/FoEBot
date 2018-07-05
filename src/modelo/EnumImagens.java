@@ -6,9 +6,20 @@ public enum EnumImagens {
 
 	//@formatter:off
 	
+	//COLETA_CENTRALIZADO_1
+	CUPULA_NIVEL_1(StringConstants.pathColetar + "cupulaNivel1.png", EnumParametrosImagem.CENTRALIZADO_1, "cupulaNivel1"),
+	PILAR_DOS_HEROIS_NIVEL_2(StringConstants.pathColetar + "pilarDosHeroisNivel2.png", EnumParametrosImagem.CENTRALIZADO_1, "pilarDosHeroisNivel2"),
+	PILAR_DOS_HEROIS_NIVEL_4(StringConstants.pathColetar + "pilarDosHeroisNivel4.png", EnumParametrosImagem.CENTRALIZADO_1, "pilarDosHeroisNivel4"),
+	PREFEITURA_IDADE_DO_FERRO(StringConstants.pathColetar + "prefeituraIdadeDoFerro.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeDoFerro"),
+	PREFEITURA_IDADE_MEDIA(StringConstants.pathColetar + "prefeituraIdadeMedia.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeMedia"),
+	PONTE_GRANDE_NIVEL_3(StringConstants.pathColetar + "ponteGrandeNivel3.png", EnumParametrosImagem.CENTRALIZADO_1, "ponteGrandeNivel3"),
+	PONTE_GRANDE_NIVEL_4(StringConstants.pathColetar + "ponteGrandeNivel4.png", EnumParametrosImagem.CENTRALIZADO_1, "ponteGrandeNivel4"),
+	SANTUARIO_DO_CONHECIMENTO(StringConstants.pathColetar + "santuarioDoConhecimento.png", EnumParametrosImagem.CENTRALIZADO_1, "santuarioDoConhecimento"),
+	
+	
 	//CENTRALIZADO_1
-	ABRIR_TABERNA(StringConstants.pathPrincipal + "abrirTaberna.png", EnumParametrosImagem.CENTRALIZADO_10, "AbrirTaberna"),
-	ABRIR_TABERNA2(StringConstants.pathPrincipal + "abrirTaberna2.png", EnumParametrosImagem.CENTRALIZADO_10, "AbrirTaberna2"),
+	ABRIR_TABERNA(StringConstants.pathPrincipal + "abrirTaberna.png", EnumParametrosImagem.CENTRALIZADO_1, "AbrirTaberna"),
+	ABRIR_TABERNA2(StringConstants.pathPrincipal + "abrirTaberna2.png", EnumParametrosImagem.CENTRALIZADO_1, "AbrirTaberna2"),
 	ACEITAR_AMIZADE(StringConstants.pathPrincipal + "aceitarAmizade.png", EnumParametrosImagem.CENTRALIZADO_1, "AceitarAmizade"),
 	AUXILIAR(StringConstants.pathPrincipal + "auxiliar.png", EnumParametrosImagem.CENTRALIZADO_1, "Auxiliar"),
 	TOP_AMIGOS(StringConstants.pathPrincipal + "topAmigos.png", EnumParametrosImagem.CENTRALIZADO_1, "TopAmigos"),
