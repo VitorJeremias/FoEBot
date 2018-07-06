@@ -129,9 +129,9 @@ public class ImageScanner {
 			compararImagens(EnumImagens.AUXILIAR, acc);
 			Thread.sleep(1500);
 			temAuxiliar = esperarImagemComLimite(EnumImagens.AUXILIAR, acc);
-			Thread.sleep(300);
-			compararImagens(EnumImagens.OK, acc);
-			Thread.sleep(200);
+			Thread.sleep(100);
+			compararImagens(EnumImagens.OK_RECOMPENSA, acc);
+			Thread.sleep(100);
 		} while (temAuxiliar);
 	}
 
@@ -144,7 +144,7 @@ public class ImageScanner {
 			Thread.sleep(500);
 			temTabernaPraSentar = esperarImagemComLimite(EnumImagens.SENTAR_NA_TABERNA, acc);
 		} while (temTabernaPraSentar);
-		compararImagens(EnumImagens.OK, acc);
+		compararImagens(EnumImagens.OK_RECOMPENSA, acc);
 	}
 
 	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
