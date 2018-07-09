@@ -100,6 +100,10 @@ public class ImageScanner {
 		compararImagens(EnumImagens.SANTUARIO_DO_CONHECIMENTO, acc);
 	}
 
+	public static void coletarPocoDosDesejos(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.SANTUARIO_DO_CONHECIMENTO, acc);
+	}
+
 	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
 		coletarPrefeituraIdadeDoFerro(acc);
 		coletarPrefeituraIdadeMedia(acc);
@@ -109,6 +113,7 @@ public class ImageScanner {
 		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_3, acc);
 		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_4, acc);
 		coletarSantuarioDoConhecimento(acc);
+		coletarPocoDosDesejos(acc);
 	}
 
 	public static void aceitarAmizade(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {

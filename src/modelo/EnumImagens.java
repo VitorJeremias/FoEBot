@@ -10,10 +10,11 @@ public enum EnumImagens {
 	CUPULA_NIVEL_1(StringConstants.pathColetar + "cupulaNivel1.png", EnumParametrosImagem.CENTRALIZADO_1, "cupulaNivel1"),
 	PILAR_DOS_HEROIS_NIVEL_2(StringConstants.pathColetar + "pilarDosHeroisNivel2.png", EnumParametrosImagem.CENTRALIZADO_1, "pilarDosHeroisNivel2"),
 	PILAR_DOS_HEROIS_NIVEL_4(StringConstants.pathColetar + "pilarDosHeroisNivel4.png", EnumParametrosImagem.CENTRALIZADO_1, "pilarDosHeroisNivel4"),
-	PREFEITURA_IDADE_DO_FERRO(StringConstants.pathColetar + "prefeituraIdadeDoFerro.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeDoFerro"),
-	PREFEITURA_IDADE_MEDIA(StringConstants.pathColetar + "prefeituraIdadeMedia.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeMedia"),
+	POCO_DOS_DESEJOS(StringConstants.pathColetar + "pocoDosDesejos.png", EnumParametrosImagem.CENTRALIZADO_1, "pocoDosDesejos"),
 	PONTE_GRANDE_NIVEL_3(StringConstants.pathColetar + "ponteGrandeNivel3.png", EnumParametrosImagem.CENTRALIZADO_1, "ponteGrandeNivel3"),
 	PONTE_GRANDE_NIVEL_4(StringConstants.pathColetar + "ponteGrandeNivel4.png", EnumParametrosImagem.CENTRALIZADO_1, "ponteGrandeNivel4"),
+	PREFEITURA_IDADE_DO_FERRO(StringConstants.pathColetar + "prefeituraIdadeDoFerro.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeDoFerro"),
+	PREFEITURA_IDADE_MEDIA(StringConstants.pathColetar + "prefeituraIdadeMedia.png", EnumParametrosImagem.CENTRALIZADO_1, "prefeituraIdadeMedia"),
 	SANTUARIO_DO_CONHECIMENTO(StringConstants.pathColetar + "santuarioDoConhecimento.png", EnumParametrosImagem.CENTRALIZADO_1, "santuarioDoConhecimento"),
 	
 	
