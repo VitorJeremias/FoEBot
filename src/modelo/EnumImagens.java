@@ -23,6 +23,7 @@ public enum EnumImagens {
 	ABRIR_TABERNA2(StringConstants.pathPrincipal + "abrirTaberna2.png", EnumParametrosImagem.CENTRALIZADO_1, "AbrirTaberna2"),
 	ACEITAR_AMIZADE(StringConstants.pathPrincipal + "aceitarAmizade.png", EnumParametrosImagem.CENTRALIZADO_1, "AceitarAmizade"),
 	AUXILIAR(StringConstants.pathPrincipal + "auxiliar.png", EnumParametrosImagem.CENTRALIZADO_1, "Auxiliar"),
+	FECHAR_JANELA_RAPIDO(StringConstants.pathPrincipal + "fecharJanela.png", EnumParametrosImagem.CENTRALIZADO_1, "FecharJanela"),	
 	OK_RECOMPENSA(StringConstants.pathPrincipal + "okRecompensa.png", EnumParametrosImagem.CENTRALIZADO_1, "okRecompensa"),
 	TOP_AMIGOS(StringConstants.pathPrincipal + "topAmigos.png", EnumParametrosImagem.CENTRALIZADO_1, "TopAmigos"),
 	

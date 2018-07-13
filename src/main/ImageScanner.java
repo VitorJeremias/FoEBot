@@ -73,27 +73,27 @@ public class ImageScanner {
 
 	public static void coletarCupulaNivel1(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.CUPULA_NIVEL_1, acc);
-		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
 	public static void coletarPilarDosHeroisNivel2(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.PILAR_DOS_HEROIS_NIVEL_2, acc);
-		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
 	public static void coletarPilarDosHeroisNivel4(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.PILAR_DOS_HEROIS_NIVEL_4, acc);
-		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
 	public static void coletarPrefeituraIdadeDoFerro(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.PREFEITURA_IDADE_DO_FERRO, acc);
-		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
 	public static void coletarPrefeituraIdadeMedia(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.PREFEITURA_IDADE_MEDIA, acc);
-		compararImagens(EnumImagens.FECHAR_JANELA, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
 	public static void coletarSantuarioDoConhecimento(String acc) throws HeadlessException, AWTException, IOException {
@@ -101,7 +101,7 @@ public class ImageScanner {
 	}
 
 	public static void coletarPocoDosDesejos(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.SANTUARIO_DO_CONHECIMENTO, acc);
+		compararImagens(EnumImagens.POCO_DOS_DESEJOS, acc);
 	}
 
 	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
@@ -154,11 +154,14 @@ public class ImageScanner {
 
 	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
 		Boolean temPF = false;
+		Thread.sleep(2000);
 		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_10, acc);
+		Thread.sleep(200);
 		compararImagens(EnumImagens.TODA_A_BARRA_10, acc);
+		Thread.sleep(200);
 		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
 		compararImagens(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
-		Thread.sleep(1200);
+		Thread.sleep(200);
 		if (!temPF) {
 			if (contasSemUsarPF.length() == 0) {
 				contasSemUsarPF = acc;
