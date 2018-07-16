@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 import modelo.EnumImagens;
 import modelo.InputManager;
 
-public class ImageScanner {
+public class FoEBotMain {
 	private static ArrayList<String> accs = new ArrayList<String>();
 	private static String contasSemUsarPF = "";
 
@@ -36,9 +36,9 @@ public class ImageScanner {
 		for (int i = 0; i < accs.size(); i++) {
 			System.out.println(accs.get(i).toUpperCase());
 			executarPassos(accs.get(i));
+			System.err.println("Contas sem upar: " + contasSemUsarPF);
 			wait(3);
 		}
-		System.err.println("Contas sem upar: " + contasSemUsarPF);
 	}
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
