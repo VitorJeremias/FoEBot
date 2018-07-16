@@ -17,30 +17,30 @@ public class Acoes {
 	public static ArrayList<String> listaContasSemUsarPF = new ArrayList<String>();
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
-		campoLogin(acc);
-		InputManager.escrever(acc);
-		botaoLogin(acc);
-		botaoJogar(acc);
-		botaoHoundsmoor(acc);
-		fecharJanela(acc);
-		Amigos(acc);
-		topAmigos(acc);
-		aceitarAmizade(acc);
-		auxiliar(acc);
-		sentarNaTaberna(acc);
-		coletar(acc);
-		moverCidade(acc);
-		coletarPrata(acc);
-		abrirMenu(acc);
-		noticias(acc);
-		grandesEdificios(acc);
-		abrir(acc);
+		// campoLogin(acc);
+		// InputManager.escrever(acc);
+		// botaoLogin(acc);
+		// botaoJogar(acc);
+		// botaoHoundsmoor(acc);
+		// fecharJanela(acc);
+		// Amigos(acc);
+		// topAmigos(acc);
+		// aceitarAmizade(acc);
+		// auxiliar(acc);
+		// sentarNaTaberna(acc);
+		// coletar(acc);
+		// moverCidade(acc);
+		// coletarPrata(acc);
+		// abrirMenu(acc);
+		// noticias(acc);
+		// grandesEdificios(acc);
+		// abrir(acc);
 		todaABarra(acc);
-		fecharJanela(acc);
-		fecharJanela(acc);
-		logout(acc);
-		sair(acc);
-		sair2(acc);
+		// fecharJanela(acc);
+		// fecharJanela(acc);
+		// logout(acc);
+		// sair(acc);
+		// sair2(acc);
 	}
 
 	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
