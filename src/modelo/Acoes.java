@@ -24,7 +24,7 @@ public class Acoes {
 		botaoHoundsmoor(acc);
 		fecharJanela(acc);
 		Amigos(acc);
-		TopAmigos(acc);
+		topAmigos(acc);
 		aceitarAmizade(acc);
 		auxiliar(acc);
 		sentarNaTaberna(acc);
@@ -43,31 +43,31 @@ public class Acoes {
 		sair2(acc);
 	}
 
-	public static void sair2(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.SAIR2, acc);
 	}
 
-	public static void sair(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void sair(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.SAIR, acc);
 	}
 
-	public static void logout(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.LOGOUT, acc);
 	}
 
-	public static void abrir(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.ABRIR, acc);
 	}
 
-	public static void grandesEdificios(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.GRANDES_EDIFICIOS, acc);
 	}
 
-	public static void noticias(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void noticias(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.NOTICIAS, acc);
 	}
 
-	public static void abrirMenu(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.ABRIR_MENU, acc);
 	}
 
@@ -76,28 +76,28 @@ public class Acoes {
 		Thread.sleep(1000);
 	}
 
-	public static void botaoLogin(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void botaoLogin(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.LOGIN, acc);
 	}
 
-	public static void botaoJogar(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void botaoJogar(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.JOGAR, acc);
 	}
 
-	public static void botaoHoundsmoor(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void botaoHoundsmoor(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.HOUNDSMOOR, acc);
 		wait(10);
 	}
 
-	public static void fecharJanela(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void fecharJanela(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.FECHAR_JANELA, acc);
 	}
 
-	public static void Amigos(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void Amigos(String acc) throws HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.AMIGOS, acc);
 	}
 
-	public static void TopAmigos(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
+	public static void topAmigos(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.TOP_AMIGOS, acc);
 		Thread.sleep(1000);
 	}
@@ -175,7 +175,7 @@ public class Acoes {
 		boolean temTabernaPraSentar = true;
 		do {
 			compararImagens(EnumImagens.SENTAR_NA_TABERNA, acc);
-			Thread.sleep(2000);
+			Thread.sleep(1500);
 			compararImagens(EnumImagens.FECHAR_JANELA, acc);
 			Thread.sleep(500);
 			temTabernaPraSentar = esperarImagemComLimite(EnumImagens.SENTAR_NA_TABERNA, acc);
@@ -230,15 +230,6 @@ public class Acoes {
 		}
 		InputManager.clicker.delay(1000);
 		System.out.println(segundos);
-	}
-
-	public static void aguardar(ArrayList<BufferedImage> bi, String acao, String acc) throws HeadlessException, AWTException {
-
-		boolean achouUm = false;
-		while (!achouUm) {
-			achouUm = achouUm || esperarImagem(bi.get(1), acao, acc);
-			achouUm = achouUm || esperarImagem(bi.get(0), acao, acc); // So procura a segunda imagem quando acha a primeira
-		}
 	}
 
 	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
