@@ -7,8 +7,10 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +19,27 @@ import javax.imageio.ImageIO;
 
 public class Acoes {
 	public static ArrayList<String> listaContasSemUsarPF = new ArrayList<String>();
+	private static ArrayList<String> accs = new ArrayList<String>();
+
+	public static void iniciarPrograma() throws IOException, HeadlessException, AWTException, InterruptedException {
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accs.txt"))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (line.length() > 0 && !line.startsWith("/")) {
+					accs.add(line);
+				}
+			}
+		}
+		Acoes.limparArquivo();
+
+		for (int i = 0; i < accs.size(); i++) {
+			System.out.println(accs.get(i).toUpperCase());
+			Acoes.executarPassos(accs.get(i));
+			System.err.println("Contas sem upar: " + Acoes.listaContasSemUsarPF);
+			Thread.sleep(50);
+			Acoes.wait(3);
+		}
+	}
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
 		campoLogin(acc);
@@ -180,7 +203,6 @@ public class Acoes {
 			compararImagens(EnumImagens.FECHAR_JANELA, acc);
 			Thread.sleep(500);
 			temPedidoDeAmizade = esperarImagemComLimite(EnumImagens.ACEITAR_AMIZADE, acc);
-
 		} while (temPedidoDeAmizade);
 	}
 
@@ -346,52 +368,6 @@ public class Acoes {
 	}
 
 	public static void acharImagem(BufferedImage bi, double widthMult, double heigthMult, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
-		Robot clicker = new Robot();
-		boolean achou = false;
-		boolean fail = true;
-		int count = 0;
-		while (achou == false && count < maxCount) {
-			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-			for (int x = 0; x < image.getWidth(); x++) {
-				for (int y = 0; y < image.getHeight(); y++) {
-					if (!achou) {
-						boolean invalid = false;
-						int k = x, l = y;
-						for (int a = 0; a < bi.getWidth(); a++) {
-							l = y;
-							for (int b = 0; b < bi.getHeight(); b++) {
-								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
-									invalid = true;
-									break;
-								} else {
-									l++;
-								}
-							}
-							if (invalid) {
-								break;
-							} else {
-								k++;
-							}
-						}
-						if (!invalid) {
-							clicker.mouseMove((int) k - (int) (bi.getWidth() * widthMult), (int) l - (int) (bi.getHeight() * heigthMult));
-							// clickEvent(k - (bi.getWidth() * widthMult), l - (bi.getHeight()
-							// *heigthMult)); // Clica no centro do objeto
-							achou = true;
-							System.out.println(acao + ": OK! " + " " + acc);
-							fail = false;
-						}
-					}
-				}
-			}
-			count++;
-		}
-		if (fail) {
-			System.out.println(acao + ": FAIL! " + acc);
-		}
-	}
-
-	public static void compararPixels(BufferedImage bi, double widthMult, double heigthMult, int maxCount, String acao, String acc) throws HeadlessException, AWTException {
 		boolean achou = false;
 		boolean fail = true;
 		int count = 0;
@@ -436,7 +412,7 @@ public class Acoes {
 
 	public static void compararImagens(EnumImagens imagem, String acc) throws HeadlessException, AWTException, IOException {
 		BufferedImage bi = ImageIO.read(new File(imagem.getPath()));
-		compararPixels(bi, imagem.getParametrosDaImagem().getWidthMult(), imagem.getParametrosDaImagem().getHeigthMult(), imagem.getParametrosDaImagem().getMaxCount(), imagem.getAcao(), acc);
+		acharImagem(bi, imagem.getParametrosDaImagem().getWidthMult(), imagem.getParametrosDaImagem().getHeigthMult(), imagem.getParametrosDaImagem().getMaxCount(), imagem.getAcao(), acc);
 	}
 
 }
