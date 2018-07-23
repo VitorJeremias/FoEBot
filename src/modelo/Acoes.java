@@ -19,19 +19,19 @@ public class Acoes {
 	public static ArrayList<String> listaContasSemUsarPF = new ArrayList<String>();
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
-		// campoLogin(acc);
-		// InputManager.escrever(acc);
-		// botaoLogin(acc);
-		// botaoJogar(acc);
-		// botaoHoundsmoor(acc);
-		// fecharJanela(acc);
-		// Amigos(acc);
-		// topAmigos(acc);
-		// aceitarAmizade(acc);w
-		// auxiliar(acc);
-		// sentarNaTaberna(acc);
-		// coletar(acc);
-		// moverCidade(acc);
+		campoLogin(acc);
+		InputManager.escrever(acc);
+		botaoLogin(acc);
+		botaoJogar(acc);
+		botaoHoundsmoor(acc);
+		fecharJanela(acc);
+		Amigos(acc);
+		topAmigos(acc);
+		aceitarAmizade(acc);
+		auxiliar(acc);
+		sentarNaTaberna(acc);
+		coletar(acc);
+		moverCidade(acc);
 		coletarPrata(acc);
 		if (temPF(acc)) {
 			abrirMenu(acc);
