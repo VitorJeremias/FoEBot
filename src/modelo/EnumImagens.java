@@ -33,6 +33,7 @@ public enum EnumImagens {
 	FECHAR_JANELA(StringConstants.pathPrincipal + "fecharJanela.png", EnumParametrosImagem.CENTRALIZADO_10, "FecharJanela"),	
 	OK(StringConstants.pathPrincipal + "ok.png", EnumParametrosImagem.CENTRALIZADO_10, "OK"),	
 	SENTAR_NA_TABERNA(StringConstants.pathPrincipal + "sentarNaTaberna.png", EnumParametrosImagem.CENTRALIZADO_10, "SentarNaTaberna"),
+	TEM_1_PF(StringConstants.pathPrincipal + "temUmPF.png", EnumParametrosImagem.CENTRALIZADO_10, "temUmPF"),
 	TODA_A_BARRA_10(StringConstants.pathPrincipal + "todaABarra10.png", EnumParametrosImagem.CENTRALIZADO_10, "TodaABarra10"),
 	TODA_A_BARRA_1_DIGITO(StringConstants.pathPrincipal + "todaABarra1Digito.png",EnumParametrosImagem.CENTRALIZADO_10, "TodaABarra1Digito"),
 	

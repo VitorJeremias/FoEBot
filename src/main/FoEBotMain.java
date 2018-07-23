@@ -21,6 +21,7 @@ public class FoEBotMain {
 				}
 			}
 		}
+		Acoes.limparArquivo();
 
 		for (int i = 0; i < accs.size(); i++) {
 			System.out.println(accs.get(i).toUpperCase());

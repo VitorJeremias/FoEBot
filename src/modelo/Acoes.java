@@ -7,7 +7,9 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,30 +19,53 @@ public class Acoes {
 	public static ArrayList<String> listaContasSemUsarPF = new ArrayList<String>();
 
 	public static void executarPassos(String acc) throws AWTException, IOException, HeadlessException, InterruptedException {
-		campoLogin(acc);
-		InputManager.escrever(acc);
-		botaoLogin(acc);
-		botaoJogar(acc);
-		botaoHoundsmoor(acc);
-		fecharJanela(acc);
-		Amigos(acc);
-		topAmigos(acc);
-		aceitarAmizade(acc);
-		auxiliar(acc);
-		sentarNaTaberna(acc);
-		coletar(acc);
-		moverCidade(acc);
+		// campoLogin(acc);
+		// InputManager.escrever(acc);
+		// botaoLogin(acc);
+		// botaoJogar(acc);
+		// botaoHoundsmoor(acc);
+		// fecharJanela(acc);
+		// Amigos(acc);
+		// topAmigos(acc);
+		// aceitarAmizade(acc);w
+		// auxiliar(acc);
+		// sentarNaTaberna(acc);
+		// coletar(acc);
+		// moverCidade(acc);
 		coletarPrata(acc);
-		abrirMenu(acc);
-		noticias(acc);
-		grandesEdificios(acc);
-		abrir(acc);
-		todaABarra(acc);
-		fecharJanela(acc);
-		fecharJanela(acc);
+		if (temPF(acc)) {
+			abrirMenu(acc);
+			noticias(acc);
+			grandesEdificios(acc);
+			abrir(acc);
+			todaABarra(acc);
+			fecharJanela(acc);
+			fecharJanela(acc);
+		} else {
+			listaContasSemUsarPF.add(acc);
+			System.err.println(acc + " Adicionado na lista");
+			escreverNoArquivo(acc);
+		}
 		logout(acc);
 		sair(acc);
 		sair2(acc);
+	}
+
+	public static void limparArquivo() throws IOException {
+		@SuppressWarnings("resource")
+		BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accsSemGE.txt"));
+		writer.write("");
+	}
+
+	public static void escreverNoArquivo(String acc) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accsSemGE.txt", true));
+		writer.append(acc + "\n");
+		writer.close();
+
+	}
+
+	public static boolean temPF(String acc) throws HeadlessException, AWTException, IOException {
+		return esperarImagemComLimite(EnumImagens.TEM_1_PF, acc);
 	}
 
 	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
