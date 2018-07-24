@@ -255,7 +255,6 @@ public class Acoes {
 		compararImagens(EnumImagens.ABRIR_TABERNA2, acc);
 		compararImagens(EnumImagens.COLETAR_PRATA, acc);
 		compararImagens(EnumImagens.OK, acc);
-
 	}
 
 	public static void moverCidade(String acc) throws AWTException, IOException, InterruptedException {
