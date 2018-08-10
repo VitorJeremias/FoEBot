@@ -65,7 +65,6 @@ public class Acoes {
 		todaABarra(acc);
 		fecharJanela(acc);
 		fecharJanela(acc);
-		Thread.sleep(1000);
 		logout(acc);
 		sair(acc);
 		sair2(acc);
