@@ -5,6 +5,7 @@ public enum EnumParametrosImagem {
 	CENTRALIZADO_1(0.5, 0.5, 1),
 	CENTRALIZADO_10(0.5, 0.5, 10),
 	CENTRALIZADO_30(0.5, 0.5, 30),
+	FORA_DIREITA_30(-3, 0.5,30),
 	INFERIOR_ESQUERDO_30(0.6,0.3,30);
 	//@formatter:on
 

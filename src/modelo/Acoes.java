@@ -17,12 +17,14 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import utils.StringConstants;
+
 public class Acoes {
 	public static ArrayList<String> listaContasSemUsarPF = new ArrayList<String>();
 	private static ArrayList<String> accs = new ArrayList<String>();
 
 	public static void iniciarPrograma() throws IOException, HeadlessException, AWTException, InterruptedException {
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accs.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(StringConstants.pathPrincipal + "accs.txt"))) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				if (line.length() > 0 && !line.startsWith("/")) {
@@ -56,19 +58,14 @@ public class Acoes {
 		coletar(acc);
 		moverCidade(acc);
 		coletarPrata(acc);
-		if (temPF(acc)) {
-			abrirMenu(acc);
-			noticias(acc);
-			grandesEdificios(acc);
-			abrir(acc);
-			todaABarra(acc);
-			fecharJanela(acc);
-			fecharJanela(acc);
-		} else {
-			listaContasSemUsarPF.add(acc);
-			System.err.println(acc + " Adicionado na lista");
-			escreverNoArquivo(acc);
-		}
+		abrirMenu(acc);
+		noticias(acc);
+		grandesEdificios(acc);
+		abrir(acc);
+		todaABarra(acc);
+		fecharJanela(acc);
+		fecharJanela(acc);
+		Thread.sleep(1000);
 		logout(acc);
 		sair(acc);
 		sair2(acc);
@@ -76,12 +73,12 @@ public class Acoes {
 
 	public static void limparArquivo() throws IOException {
 		@SuppressWarnings("resource")
-		BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accsSemGE.txt"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt"));
 		writer.write("");
 	}
 
 	public static void escreverNoArquivo(String acc) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\Vitor\\Downloads\\PrintsFOE\\accsSemGE.txt", true));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt", true));
 		writer.append(acc + "\n");
 		writer.close();
 
@@ -183,14 +180,30 @@ public class Acoes {
 		compararImagens(EnumImagens.POCO_DOS_DESEJOS, acc);
 	}
 
+	public static void coletarPonteGrandeNivel1(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_1, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
+	}
+
+	public static void coletarPonteGrandeNivel3(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_3, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
+	}
+
+	public static void coletarPonteGrandeNivel4(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_4, acc);
+		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
+	}
+
 	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
 		coletarPrefeituraIdadeDoFerro(acc);
 		coletarPrefeituraIdadeMedia(acc);
 		coletarCupulaNivel1(acc);
 		coletarPilarDosHeroisNivel2(acc);
 		coletarPilarDosHeroisNivel4(acc);
-		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_3, acc);
-		compararImagens(EnumImagens.PONTE_GRANDE_NIVEL_4, acc);
+		coletarPonteGrandeNivel1(acc);
+		coletarPonteGrandeNivel3(acc);
+		coletarPonteGrandeNivel4(acc);
 		coletarSantuarioDoConhecimento(acc);
 		coletarPocoDosDesejos(acc);
 	}
@@ -243,6 +256,7 @@ public class Acoes {
 		if (!temPF) {
 			listaContasSemUsarPF.add(acc);
 			System.err.println(acc + " Adicionado na lista");
+			escreverNoArquivo(acc);
 		}
 	}
 

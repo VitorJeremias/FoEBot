@@ -20,14 +20,14 @@ public class InputManager {
 		for (int i = 0; i < nome.length(); i++) {
 			char[] chars = nome.toUpperCase().toCharArray();
 			switch (chars[i]) {
-			case 'Ã':
+			case 'Ãƒ':
 				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
 				keyboard.keyRelease(KeyEvent.VK_DEAD_TILDE);
 				keyboard.keyPress(KeyEvent.VK_A);
 				keyboard.keyRelease(KeyEvent.VK_A);
 				keyboard.delay(20);
 				break;
-			case 'Ê':
+			case 'ÃŠ':
 				keyboard.keyPress(KeyEvent.VK_SHIFT);
 				keyboard.keyPress(KeyEvent.VK_DEAD_TILDE);
 				keyboard.keyRelease(KeyEvent.VK_SHIFT);
@@ -48,7 +48,7 @@ public class InputManager {
 		keyboard = new Robot();
 		for (int i = 0; i < 20; i++) {
 			keyboard.keyPress(KeyEvent.VK_BACK_SPACE);
-			keyboard.delay(20);
+			keyboard.delay(70);
 		}
 	}
 
