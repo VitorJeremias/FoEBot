@@ -69,6 +69,7 @@ public class Acoes {
 		sair(acc);
 		sair2(acc);
 		
+		
 	}
 
 	public static void limparArquivo() throws IOException {
