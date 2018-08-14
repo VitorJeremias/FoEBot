@@ -228,8 +228,8 @@ public class Acoes {
 
 	}
 
-	public static boolean temPF(String acc) throws HeadlessException, AWTException, IOException {
-		return esperarImagemComLimite(EnumImagens.TEM_1_PF, acc);
+	public static boolean naoTemPF(String acc) throws HeadlessException, AWTException, IOException {
+		return esperarImagemComLimite(EnumImagens.NAO_TEM_PF, acc);
 	}
 
 	public static void coletarCupulaNivel1(String acc) throws HeadlessException, AWTException, IOException {
