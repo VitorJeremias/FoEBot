@@ -68,53 +68,6 @@ public class Acoes {
 		logout(acc);
 		sair(acc);
 		sair2(acc);
-		
-		
-	}
-
-	public static void limparArquivo() throws IOException {
-		@SuppressWarnings("resource")
-		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt"));
-		writer.write("");
-	}
-
-	public static void escreverNoArquivo(String acc) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt", true));
-		writer.append(acc + "\n");
-		writer.close();
-
-	}
-
-	public static boolean temPF(String acc) throws HeadlessException, AWTException, IOException {
-		return esperarImagemComLimite(EnumImagens.TEM_1_PF, acc);
-	}
-
-	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.SAIR2, acc);
-	}
-
-	public static void sair(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.SAIR, acc);
-	}
-
-	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.LOGOUT, acc);
-	}
-
-	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.ABRIR, acc);
-	}
-
-	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.GRANDES_EDIFICIOS, acc);
-	}
-
-	public static void noticias(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.NOTICIAS, acc);
-	}
-
-	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
-		compararImagens(EnumImagens.ABRIR_MENU, acc);
 	}
 
 	public static void campoLogin(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
@@ -146,6 +99,137 @@ public class Acoes {
 	public static void topAmigos(String acc) throws InterruptedException, HeadlessException, AWTException, IOException {
 		compararImagens(EnumImagens.TOP_AMIGOS, acc);
 		Thread.sleep(1000);
+	}
+
+	public static void aceitarAmizade(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		boolean temPedidoDeAmizade = true;
+		do {
+			compararImagens(EnumImagens.ACEITAR_AMIZADE, acc);
+			Thread.sleep(500);
+			compararImagens(EnumImagens.FECHAR_JANELA, acc);
+			Thread.sleep(500);
+			temPedidoDeAmizade = esperarImagemComLimite(EnumImagens.ACEITAR_AMIZADE, acc);
+		} while (temPedidoDeAmizade);
+	}
+
+	public static void auxiliar(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		boolean temAuxiliar = true;
+		do {
+			compararImagens(EnumImagens.AUXILIAR, acc);
+			Thread.sleep(1500);
+			temAuxiliar = esperarImagemComLimite(EnumImagens.AUXILIAR, acc);
+			Thread.sleep(100);
+			compararImagens(EnumImagens.OK_RECOMPENSA, acc);
+			Thread.sleep(100);
+		} while (temAuxiliar);
+	}
+
+	public static void sentarNaTaberna(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		boolean temTabernaPraSentar = true;
+		do {
+			compararImagens(EnumImagens.SENTAR_NA_TABERNA, acc);
+			Thread.sleep(1500);
+			compararImagens(EnumImagens.FECHAR_JANELA, acc);
+			Thread.sleep(500);
+			temTabernaPraSentar = esperarImagemComLimite(EnumImagens.SENTAR_NA_TABERNA, acc);
+		} while (temTabernaPraSentar);
+		compararImagens(EnumImagens.OK_RECOMPENSA, acc);
+	}
+
+	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
+		coletarPrefeituraIdadeDoFerro(acc);
+		coletarPrefeituraIdadeMedia(acc);
+		coletarCupulaNivel1(acc);
+		coletarPilarDosHeroisNivel2(acc);
+		coletarPilarDosHeroisNivel4(acc);
+		coletarPonteGrandeNivel1(acc);
+		coletarPonteGrandeNivel3(acc);
+		coletarPonteGrandeNivel4(acc);
+		coletarSantuarioDoConhecimento(acc);
+		coletarPocoDosDesejos(acc);
+	}
+
+	public static void moverCidade(String acc) throws AWTException, IOException, InterruptedException {
+		Robot keyboard = new Robot();
+		keyboard.keyPress(KeyEvent.VK_A);
+		Thread.sleep(500);
+		keyboard.keyRelease(KeyEvent.VK_A);
+		keyboard.keyPress(KeyEvent.VK_S);
+		Thread.sleep(100);
+		keyboard.keyRelease(KeyEvent.VK_S);
+	}
+
+	public static void coletarPrata(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		Robot keyboard = new Robot();
+		keyboard.keyPress(KeyEvent.VK_W);
+		Thread.sleep(1000);
+		keyboard.keyRelease(KeyEvent.VK_W);
+		compararImagens(EnumImagens.ABRIR_TABERNA, acc);
+		compararImagens(EnumImagens.ABRIR_TABERNA2, acc);
+		compararImagens(EnumImagens.COLETAR_PRATA, acc);
+		compararImagens(EnumImagens.OK, acc);
+	}
+
+	public static void abrirMenu(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.ABRIR_MENU, acc);
+	}
+
+	public static void noticias(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.NOTICIAS, acc);
+	}
+
+	public static void grandesEdificios(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.GRANDES_EDIFICIOS, acc);
+	}
+
+	public static void abrir(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.ABRIR, acc);
+	}
+
+	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
+		Boolean temPF = false;
+		Thread.sleep(1000);
+		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_10, acc);
+		Thread.sleep(200);
+		compararImagens(EnumImagens.TODA_A_BARRA_10, acc);
+		Thread.sleep(200);
+		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
+		compararImagens(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
+		Thread.sleep(200);
+		if (!temPF) {
+			listaContasSemUsarPF.add(acc);
+			System.err.println(acc + " Adicionado na lista");
+			escreverNoArquivo(acc);
+		}
+	}
+
+	public static void logout(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.LOGOUT, acc);
+	}
+
+	public static void sair(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.SAIR, acc);
+	}
+
+	public static void sair2(String acc) throws HeadlessException, AWTException, IOException {
+		compararImagens(EnumImagens.SAIR2, acc);
+	}
+
+	public static void limparArquivo() throws IOException {
+		@SuppressWarnings("resource")
+		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt"));
+		writer.write("");
+	}
+
+	public static void escreverNoArquivo(String acc) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(StringConstants.pathPrincipal + "accsSemGE.txt"));
+		writer.append(acc + "\n");
+		writer.close();
+
+	}
+
+	public static boolean temPF(String acc) throws HeadlessException, AWTException, IOException {
+		return esperarImagemComLimite(EnumImagens.TEM_1_PF, acc);
 	}
 
 	public static void coletarCupulaNivel1(String acc) throws HeadlessException, AWTException, IOException {
@@ -196,92 +280,6 @@ public class Acoes {
 		compararImagens(EnumImagens.FECHAR_JANELA_RAPIDO, acc);
 	}
 
-	public static void coletar(String acc) throws HeadlessException, AWTException, IOException {
-		coletarPrefeituraIdadeDoFerro(acc);
-		coletarPrefeituraIdadeMedia(acc);
-		coletarCupulaNivel1(acc);
-		coletarPilarDosHeroisNivel2(acc);
-		coletarPilarDosHeroisNivel4(acc);
-		coletarPonteGrandeNivel1(acc);
-		coletarPonteGrandeNivel3(acc);
-		coletarPonteGrandeNivel4(acc);
-		coletarSantuarioDoConhecimento(acc);
-		coletarPocoDosDesejos(acc);
-	}
-
-	public static void aceitarAmizade(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
-		boolean temPedidoDeAmizade = true;
-		do {
-			compararImagens(EnumImagens.ACEITAR_AMIZADE, acc);
-			Thread.sleep(500);
-			compararImagens(EnumImagens.FECHAR_JANELA, acc);
-			Thread.sleep(500);
-			temPedidoDeAmizade = esperarImagemComLimite(EnumImagens.ACEITAR_AMIZADE, acc);
-		} while (temPedidoDeAmizade);
-	}
-
-	public static void auxiliar(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
-		boolean temAuxiliar = true;
-		do {
-			compararImagens(EnumImagens.AUXILIAR, acc);
-			Thread.sleep(1500);
-			temAuxiliar = esperarImagemComLimite(EnumImagens.AUXILIAR, acc);
-			Thread.sleep(100);
-			compararImagens(EnumImagens.OK_RECOMPENSA, acc);
-			Thread.sleep(100);
-		} while (temAuxiliar);
-	}
-
-	public static void sentarNaTaberna(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
-		boolean temTabernaPraSentar = true;
-		do {
-			compararImagens(EnumImagens.SENTAR_NA_TABERNA, acc);
-			Thread.sleep(1500);
-			compararImagens(EnumImagens.FECHAR_JANELA, acc);
-			Thread.sleep(500);
-			temTabernaPraSentar = esperarImagemComLimite(EnumImagens.SENTAR_NA_TABERNA, acc);
-		} while (temTabernaPraSentar);
-		compararImagens(EnumImagens.OK_RECOMPENSA, acc);
-	}
-
-	public static void todaABarra(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
-		Boolean temPF = false;
-		Thread.sleep(1500);
-		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_10, acc);
-		Thread.sleep(200);
-		compararImagens(EnumImagens.TODA_A_BARRA_10, acc);
-		Thread.sleep(200);
-		temPF = temPF || esperarImagemComLimite(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
-		compararImagens(EnumImagens.TODA_A_BARRA_1_DIGITO, acc);
-		Thread.sleep(200);
-		if (!temPF) {
-			listaContasSemUsarPF.add(acc);
-			System.err.println(acc + " Adicionado na lista");
-			escreverNoArquivo(acc);
-		}
-	}
-
-	public static void coletarPrata(String acc) throws HeadlessException, AWTException, IOException, InterruptedException {
-		Robot keyboard = new Robot();
-		keyboard.keyPress(KeyEvent.VK_W);
-		Thread.sleep(1000);
-		keyboard.keyRelease(KeyEvent.VK_W);
-		compararImagens(EnumImagens.ABRIR_TABERNA, acc);
-		compararImagens(EnumImagens.ABRIR_TABERNA2, acc);
-		compararImagens(EnumImagens.COLETAR_PRATA, acc);
-		compararImagens(EnumImagens.OK, acc);
-	}
-
-	public static void moverCidade(String acc) throws AWTException, IOException, InterruptedException {
-		Robot keyboard = new Robot();
-		keyboard.keyPress(KeyEvent.VK_A);
-		Thread.sleep(500);
-		keyboard.keyRelease(KeyEvent.VK_A);
-		keyboard.keyPress(KeyEvent.VK_S);
-		Thread.sleep(100);
-		keyboard.keyRelease(KeyEvent.VK_S);
-	}
-
 	public static void wait(int segundos) throws AWTException {
 		InputManager.clicker = new Robot();
 		System.out.print("Wait " + segundos + "s: ");
@@ -291,49 +289,6 @@ public class Acoes {
 		}
 		InputManager.clicker.delay(1000);
 		System.out.println(segundos);
-	}
-
-	public static boolean esperarImagem(BufferedImage bi, String acao, String acc) throws HeadlessException, AWTException {
-		System.out.println("Procurando imagem " + acao);
-		boolean achou = false;
-		boolean fail = true;
-		while (achou == false) {
-			BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-			for (int x = 0; x < image.getWidth(); x++) {
-				for (int y = 0; y < image.getHeight(); y++) {
-					if (!achou) {
-						boolean invalid = false;
-						int k = x, l = y;
-						for (int a = 0; a < bi.getWidth(); a++) {
-							l = y;
-							for (int b = 0; b < bi.getHeight(); b++) {
-								if (bi.getRGB(a, b) != image.getRGB(k, l)) {
-									invalid = true;
-									break;
-								} else {
-									l++;
-								}
-							}
-							if (invalid) {
-								break;
-							} else {
-								k++;
-							}
-						}
-						if (!invalid) {
-							achou = true;
-							System.out.println(acao + ": Achou! " + " " + acc);
-							fail = false;
-						}
-					}
-				}
-			}
-		}
-		if (fail) {
-			System.out.println(acao + ": Nao achou! " + acc);
-			achou = false;
-		}
-		return achou;
 	}
 
 	public static boolean esperarImagemComLimite(EnumImagens imagem, String acc) throws HeadlessException, AWTException, IOException {
